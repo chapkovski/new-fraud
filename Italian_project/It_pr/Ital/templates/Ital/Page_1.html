@@ -1,0 +1,141 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block styles %}
+
+    <style>
+        .myimg {
+            height: 200px;
+            overflow: hidden;
+            border-color: #DADADA;
+            border-style: solid;
+            border-width: 0;
+            margin-bottom: 20px;
+        }
+
+        .myimg img {
+            display: block;
+            margin: auto;
+
+        }
+
+        .alert {
+            margin: 0;
+            padding: 0;
+        }
+
+        @media only screen and (max-device-width: 480px) {
+
+            img {
+                display: block;
+                margin: 0 auto;
+                margin-left: auto;;
+                width: 100%;
+                heigth: auto;
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    Instruction
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+    <div class="card-body">
+
+
+
+    <p>
+        We will now explain in detail what choices you have to make in the first part of the experiment. The first part
+        consists of 10 periods. <br/>At the end of the experiment, if Part 1 is selected for the final payout, we will
+        draw one of the ten periods randomly with equal probability. Your final earnings will be given by the earnings
+        you obtained in the drawn period plus 3 euros for submitting to the experiment.
+    </p>
+
+    <p>
+        At the beginning of the first part, you will be randomly and anonymously grouped in groups of 11 members. The
+        composition of the group will remain unchanged for all 10 periods of this first part. None of you will be able
+        to know the identity of the other members of your group or of other groups either during the experiment or
+        afterwards.
+    </p>
+    <p>
+        Within each group of 11 members, there will be the ALPHA party, consisting of 4 members and a "candidate A" and
+        the BETA party, consisting of 5 members and a "candidate B". <br/>The role of ALPHA party member and candidate
+        A, as well as the role of BETA party member and candidate B, are assigned in a completely random manner and will
+        remain unchanged for all 10 periods of the first part.
+    </p>
+    <p>
+        Each of you will then be informed whether you are a member of the ALPHA party or a member of the BETA party or
+        whether you have been assigned the role of candidate A or candidate B.
+    </p>
+    <p>
+        Each member of the ALPHA party and the BETA party will be awarded a Y bonus. We will see what this means in a
+        moment. <br/>Next, each ALPHA and BETA party member will be asked to choose one of two options: the "VOTE"
+        option or the "ABSTAIN" option. To make this choice you simply have to select one of the two options and press
+        the "OK" button that you will see on the screen.<br/>
+    </p>
+     {% if session.config.info and session.config.fraud %}
+        <p>However, before the ALPHA and BETA party members decide whether to vote or abstain, candidate A and candidate
+            B have the option of subtracting a vote from the other party and adding it to their own party. The cost of
+            this operation is the same for both candidate A and candidate B, it varies from period to period and can be
+            20 points or 40 points, and in each period all participants will be informed of its amount.</p>
+        <p>Let us take an example:</p>
+        <p>Suppose candidate A decided to subtract one vote from the BETA party and add it to the ALPHA party while
+            candidate B did not use this tool.</p>
+        <p>- If the BETA party has at least one individual who has chosen to vote then this vote will automatically be
+            added to the ALPHA party and subtracted from the BETA party.</p>
+        <p>- If in the BETA party no individual has chosen to vote then a vote will automatically be added to the ALPHA
+            party while there will be no change for the BETA party.&nbsp;</p>
+        <p>Suppose both candidate A and candidate B have decided to subtract a vote from the other party, in this case
+            there will be no change in the vote count for the two parties.</p>
+        <p>After both candidate A and candidate B have chosen whether or not to subtract a vote from the BETA and ALPHA
+            parties respectively and have been informed of this by each other, candidate A and candidate B will be able
+            to choose which of the following messages to send to both the ALPHA and BETA party members.</p>
+        <p>Messages to choose from for candidate A:</p>
+        <p>- Candidate B has chosen to subtract one vote from the ALPHA party.</p>
+        <p>- Candidate B has chosen not to deduct any votes from the ALPHA party</p>
+        <p>- No communication</p>
+        <p>Messages to choose from for candidate B:</p>
+        <p>- Candidate A has chosen to subtract one vote from the BETA party</p>
+        <p>- Candidate A has chosen not to deduct any votes from the BETA party</p>
+        <p>- No communication</p>
+        <p>Finally, after receiving the messages from candidate A and candidate B, the ALPHA and BETA party members will
+            proceed to choose whether to vote or abstain.</p>
+        <p>The ALPHA and BETA party members will not be informed of the actual choices made by the candidates regarding
+            vote abstention, neither during nor at the end of the experiment.</p>
+        <p>After each ALPHA and BETA party member has chosen to vote or abstain, the gain for that period for both
+            candidate A and B and the ALPHA and BETA party members will be shown to you on the screen.</p>
+    {% elif session.config.fraud %}
+        <p>However, before the ALPHA and BETA party members decide whether to vote or abstain, candidate A and candidate
+            B have the option of subtracting a vote from the other party and adding it to their own party. The cost of
+            this operation is the same for both candidate A and candidate B, it varies from period to period and can be
+            20 points or 40 points, and in each period all participants will be informed of its amount.</p>
+        <p>Let us take an example:</p>
+        <p>Suppose candidate A decided to subtract one vote from the BETA party and add it to the ALPHA party while
+            candidate B did not use this tool.</p>
+        <p>- If the BETA party has at least one individual who has chosen to vote then this vote will automatically be
+            added to the ALPHA party and subtracted from the BETA party.</p>
+        <p>- If in the BETA party no individual has chosen to vote then a vote will automatically be added to the ALPHA
+            party while there will be no change for the BETA party.&nbsp;</p>
+        <p>Suppose both candidate A and candidate B have decided to subtract a vote from the other party, in this case
+            there will be no change in the vote count for the two parties.</p>
+        <p>After both candidate A and candidate B have chosen whether or not to subtract one vote from the BETA and
+            ALPHA parties respectively and have been mutually informed, the ALPHA and BETA party members will proceed to
+            choose the VOTE or ABSTAIN option.</p>
+        <p>The ALPHA and BETA party members will not be informed of the actual choices made by the candidates regarding
+            vote deduction, neither during nor at the end of the experiment.</p>
+        <p>After each ALPHA and BETA party member has chosen to vote or abstain, the gain for that period for both
+            candidate A and B and the ALPHA and BETA party members will be shown to you on the screen.</p>
+    {% else %}
+        <p>
+            After each of the ALPHA and BETA party members has chosen
+            whether to vote or abstain, the earnings for that period for both candidate A and B and the ALPHA and BETA
+            party
+            members will be shown to you on the screen.
+        </p>
+    {% endif %}
+
+
+    {% next_button %}
+
+{% endblock %}

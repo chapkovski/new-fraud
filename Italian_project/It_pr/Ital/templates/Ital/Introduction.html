@@ -1,0 +1,97 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block styles %}
+
+    <style>
+        .myimg {
+            height: 200px;
+            overflow: hidden;
+            border-color: #DADADA;
+            border-style: solid;
+            border-width: 0;
+            margin-bottom: 20px;
+        }
+
+        .myimg img {
+            display: block;
+            margin: auto;
+
+        }
+
+        .alert {
+            margin: 0;
+            padding: 0;
+        }
+
+        @media only screen and (max-device-width: 480px) {
+
+            img {
+                display: block;
+                margin: 0 auto;
+                margin-left: auto;;
+                width: 100%;
+                heigth: auto;
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    General introduction
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+    <div class="card-body">
+
+
+
+    <p>Thank you for agreeing to participate in this economic experiment.
+        In addition to receiving a {{ Constants.endowment }} reward for showing up on time, you will have the
+        opportunity to earn money.
+        Your earnings will depend on the decisions you make according to the rules we will explain in detail below.
+        As soon as the experiment is over, your earnings will be paid to you in cash in private.Thank you for agreeing
+        to participate in this economic experiment.
+        In addition to receiving a {{ Constants.endowment }} reward for showing up on time, you will have the
+        opportunity to earn money.
+        Your earnings will depend on the decisions you make according to the rules we will explain in detail below.
+        As soon as the experiment is over, your earnings will be paid to you in cash in private.
+    </p>
+    <p>
+    If you have any questions about the instructions or any other problems, raise your hand so that you can tell me
+    privately about your doubts and problems.
+    </p>
+
+
+    <p>
+        The experiment consists of two parts, each independent of the other, and the whole experiment will take about __
+        minutes.
+        Instructions for each part will be given at the beginning of each part.
+        In each of these two parts you will have the opportunity to earn money, in accordance with the instructions that
+        will be given to you shortly.
+        Although you will be asked to make choices in both parts of the experiment, your final earnings will depend on
+        the choices you make in only one of the two parts.
+        In particular, at the end of the experiment, the computer will randomly select one of the two parts of the
+        experiment with equal probability.
+        Your final gains will depend on the choices you make in the selected part.
+    </p>
+
+    <p>
+        During the experiment, your earnings will be expressed in points.
+        The conversion rate between points and Euros is XXX points per XXX Euros.
+        Your final earnings from participating in the experiment will be equal to the earnings obtained in the selected
+        part plus xxx Euros for showing up on time.
+        You will be paid privately by presenting the number you randomly drew from the bag before entering the lab and
+        based on the code you will be given at the end of the experiment.
+    </p>
+
+    <p>
+        For the duration of the experiment you are not allowed to communicate with other participants in the experiment.
+        Please switch off your mobile phone.Instructions for the first part of the experiment are given below. The
+        instructions for the second part will be given to you once this first part is finished.
+    </p>
+
+
+
+    {% next_button %}
+
+{% endblock %}

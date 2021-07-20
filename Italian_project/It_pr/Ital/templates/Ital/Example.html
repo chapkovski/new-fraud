@@ -1,0 +1,82 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block styles %}
+
+    <style>
+        .myimg {
+            height: 200px;
+            overflow: hidden;
+            border-color: #DADADA;
+            border-style: solid;
+            border-width: 0;
+            margin-bottom: 20px;
+        }
+
+        .myimg img {
+            display: block;
+            margin: auto;
+
+        }
+
+        .alert {
+            margin: 0;
+            padding: 0;
+        }
+
+        @media only screen and (max-device-width: 480px) {
+
+            img {
+                display: block;
+                margin: 0 auto;
+                margin-left: auto;;
+                width: 100%;
+                heigth: auto;
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    Example
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+    <div class="card-body">
+
+
+    {% if session.config.fraud or session.config.info %}
+        <p>Let us take an example:</p>
+        <p>Suppose that the cost of subtracting a mark is 20 points. Suppose further that candidate A decides to proceed
+            with vote subtraction while candidate B decides not to use this tool.</p>
+        <p>Finally, suppose that one ALPHA party member and two BETA party members choose to vote.</p>
+        <p>To calculate each participant's payoff we need to take into account that candidate A chooses to subtract one
+            vote and that therefore the ALPHA party has more votes than the BETA party.</p>
+        <p>The participants' payoffs will thus be calculated for this period:</p>
+        <p>- the ALPHA party member who chose to vote will receive 5 points. The other four ALPHA members who chose to
+            abstain will receive 5 points plus their personal Y bonus.</p>
+        <p>- The two BETA party members who chose to vote will receive 105 points while the three other BETA party
+            members who chose to abstain will receive 105 points plus their personal Y bonus.</p>
+        <p>- Finally, candidate A will receive 210-40=170 points while candidate B will receive 60 points.</p>
+        <p>In each period you will be able to see whether it is the ALPHA party or the BETA party that has the most
+            votes in a table that will automatically update at the end of each period. At the end of each period you
+            will also be informed about your earnings in that period and your earnings in previous periods.</p>
+
+    {% else %}
+        <p>Let us take an example:</p>
+        <p>Suppose that one component of the ALPHA party and two components of the BETA party choose the VOTE option.
+            The BETA party then has more votes than the ALPHA party.</p>
+        <p>The participants' earnings will thus be calculated for this period:</p>
+        <p>- the ALPHA party member who chose to vote will receive 5 points. The other four ALPHA members who chose to
+            abstain will receive 5 points plus their personal Y bonus.</p>
+        <p>- The two BETA party members who chose to vote will receive 105 points while the three other BETA party
+            members who chose to abstain will receive 105 points plus their personal Y bonus.</p>
+        <p>- Finally, candidate A will receive 60 points while candidate B will receive 210 points.</p>
+        <p>In each period you will be able to see whether it is the ALPHA party or the BETA party that has the most
+            votes in a table that will automatically update at the end of each period. At the end of each period you
+            will also be informed about your earnings in that period and your earnings in previous periods.</p>
+    {% endif %}
+
+
+    {% next_button %}
+
+{% endblock %}

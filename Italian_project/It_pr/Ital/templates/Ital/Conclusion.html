@@ -1,0 +1,53 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block styles %}
+
+    <style>
+        .myimg {
+            height: 200px;
+            overflow: hidden;
+            border-color: #DADADA;
+            border-style: solid;
+            border-width: 0;
+            margin-bottom: 20px;
+        }
+
+        .myimg img {
+            display: block;
+            margin: auto;
+
+        }
+
+        .alert {
+            margin: 0;
+            padding: 0;
+        }
+
+        @media only screen and (max-device-width: 480px) {
+
+            img {
+                display: block;
+                margin: 0 auto;
+                margin-left: auto;;
+                width: 100%;
+                heigth: auto;
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    Conclusion
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+    <div class="card-body">
+
+    <p>If you have any questions, raise your hand. We will now take a short quiz to check that you have correctly
+        understood the instructions. Please read each question carefully and answer it. When everyone has completed the
+        test correctly we will continue with the experiment. If you have any questions or encounter any difficulties
+        during the test please raise your hand.</p>
+
+    {% next_button %}
+
+{% endblock %}

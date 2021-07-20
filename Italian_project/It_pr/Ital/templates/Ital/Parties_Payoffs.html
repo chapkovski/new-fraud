@@ -1,0 +1,74 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block styles %}
+
+    <style>
+        .myimg {
+            height: 200px;
+            overflow: hidden;
+            border-color: #DADADA;
+            border-style: solid;
+            border-width: 0;
+            margin-bottom: 20px;
+        }
+
+        .myimg img {
+            display: block;
+            margin: auto;
+
+        }
+
+        .alert {
+            margin: 0;
+            padding: 0;
+        }
+
+        @media only screen and (max-device-width: 480px) {
+
+            img {
+                display: block;
+                margin: 0 auto;
+                margin-left: auto;;
+                width: 100%;
+                heigth: auto;
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    Payoffs
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+    <div class="card-body">
+
+
+    <p><strong>Gain for ALPHA and BETA party members: </strong></p>
+    <p>- Assume you have chosen the VOTE option.</p>
+    <p>o If your party has more members who chose to vote than the other party then you will earn 105 points in this
+        period.</p>
+    <p>o If both parties have the same number of members who have chosen to vote then your gain for this period will be
+        55 points.</p>
+    <p>o If, finally, your party has fewer members who chose to vote than the other party then you will gain 5 points
+        for this period.</p>
+    <p>- Now suppose you have chosen option Y.</p>
+    <p>o If your party has more members who chose to vote than the other party then you will earn 105 points plus your Y
+        bonus in this period.</p>
+    <p>o If both parties have the same number of members who have chosen to vote then your gain for this period will be
+        55 points plus your Y bonus.</p>
+    <p>o If your party has fewer members who have chosen to vote than the other party then you will earn 5 points plus
+        your Y bonus for this period.</p>
+    <p>The amount of bonus Y for each ALPHA and BETA party member is randomly assigned by the computer at the beginning
+        of each period. In each period of this session each ALPHA and BETA party member will have the same probability
+        of being awarded a bonus Y ranging from 0 to 55.</p>
+    <p>The bonus Y that will be awarded to each member of the ALPHA and BETA party depends neither on the value of the
+        bonus Y that was awarded in the previous periods nor on the decisions made in the previous periods. Similarly,
+        the value of the Y bonus that you will be awarded does not depend on the value of the Y bonus of the other
+        members nor on their choices.&nbsp;</p>
+    <p>Y bonuses are allocated separately to each component so each participant's Y bonus is typically different from
+        the others. Each member will know the value of their own bonus Y but not that of the others.</p>
+
+    {% next_button %}
+
+{% endblock %}
