@@ -1,0 +1,84 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block styles %}
+
+    <style>
+        .myimg {
+            height: 200px;
+            overflow: hidden;
+            border-color: #DADADA;
+            border-style: solid;
+            border-width: 0;
+            margin-bottom: 20px;
+        }
+
+        .myimg img {
+            display: block;
+            margin: auto;
+
+        }
+
+        .alert {
+            margin: 0;
+            padding: 0;
+        }
+
+        @media only screen and (max-device-width: 480px) {
+
+            img {
+                display: block;
+                margin: 0 auto;
+                margin-left: auto;;
+                width: 100%;
+                heigth: auto;
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    Stage 2
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+    <div class="card-body">
+
+    <p>We will now explain in detail what choices you will have to make in the second part of the experiment. The
+        composition of the group is the same as in the first part of the experiment.</p>
+    <p>The second part consists of 10 periods, in each of which you will have to make your choices based on the same
+        rules.</p>
+    <p>At the end of the experiment, if Part 2 is selected for the final payout, we will draw one of the 10 periods
+        randomly with equal probability. Your final earnings will be the earnings you earned in the drawn period plus 3
+        euros for showing up to the experiment.</p>
+    <p>In each period of Part 2, both you and the other 10 members of your group with whom you interacted in the first
+        part of the experiment will receive an amount of points equal to XXX .</p>
+    <p>Based on the XXX points awarded in the period, both you and the other members of your group will have to choose
+        how many points to keep and how many to invest in a group project.</p>
+    <p>The points you invest in the group project will be multiplied by x and equally distributed among the 10 members
+        of your group, except you.</p>
+    <p>Similarly, the amount of points invested in the group project by each other group member, e.g. participant 5,
+        will be multiplied and distributed equally between you and the other 9 members of your group, excluding the
+        participant.</p>
+    <p><strong>How are earnings determined? </strong></p>
+    <p>- Your earnings in the generic Part 2 period will be:</p>
+    <p>xxxx points</p>
+    <p>minus the amount of points you decide to invest in the group project</p>
+    <p>plus the amount of points invested in the project by the other members of your group multiplied by XX and divided
+        by 10.</p>
+    <p><strong>- Example 1</strong></p>
+    <p>Suppose a participant has decided to invest half of the total amount of points of the period in the group
+        project, i.e. XXX points. Suppose further that the other members of his group have invested a total of XXX
+        points in the group project. The gain for the period of this individual will then be equal to:</p>
+    <p>MATH</p>
+    <p><strong>- Example 2</strong></p>
+    <p>Suppose a participant has decided not to invest any of the total amount of points for the period in the group
+        project, i.e. 0 points. Suppose further that the other members of his group have invested a total of XXX points
+        in the project. The gain for the period for this individual would then be:</p>
+    <p>MATH</p>
+    <p><strong>What happens now? </strong></p>
+    <p>You will now have to answer a few questions to check that you are clear about how the second part of the
+        experiment works.</p>
+
+    {% next_button %}
+
+{% endblock %}

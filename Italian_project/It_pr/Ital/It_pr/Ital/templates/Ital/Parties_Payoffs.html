@@ -1,0 +1,87 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block styles %}
+
+    <style>
+        .myimg {
+            height: 200px;
+            overflow: hidden;
+            border-color: #DADADA;
+            border-style: solid;
+            border-width: 0;
+            margin-bottom: 20px;
+        }
+
+        .myimg img {
+            display: block;
+            margin: auto;
+
+        }
+
+        .alert {
+            margin: 0;
+            padding: 0;
+        }
+
+        @media only screen and (max-device-width: 480px) {
+
+            img {
+                display: block;
+                margin: 0 auto;
+                margin-left: auto;;
+                width: 100%;
+                heigth: auto;
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    Payoffs
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+    <div class="card-body">
+
+
+    <p>
+        <strong>Earnings of members of party A and of party B </strong>
+    </p>
+    <p>
+        Suppose you choose to vote:
+        <br/>
+        - If your party has more votes than the other party, then you will earn 105 points;
+        <br/>
+        - If both parties have the same number of votes than the other party then you will earn 55 points;
+        <br/>
+        - If, instead, the other party has more votes than your party, then you will earn 5 points;
+    </p>
+
+    <p>
+        Alternatively, suppose you choose to abstain:
+        <br/>
+        - If your party has more votes than the other party, then you will earn 105 points plus your Y bonus;
+        <br/>
+        - If both parties have the same number of votes than the other party then you will earn 55 points plus your Y
+        bonus;
+        <br/>
+        - If, instead, the other party has more votes than your party, then you will earn 5 points plus your Y bonus;
+    </p>
+
+    <p>
+        The amount of your Y-bonus is assigned randomly by the computer and is shown on your screen. In any given round
+        you have an equal chance of being assigned any Y-bonus between 0 and 55 points. Your Y-bonus in each round does
+        not depend on your Y-bonus or decisions in previous rounds, or on the Y-bonuses and decisions of other
+        participants.
+    </p>
+
+    <p>
+        Since Y-bonuses are assigned separately for each participant, different participants will typically have
+        different Y-bonuses. While you are told your own Y-bonus, you are never told the Y-bonuses of other
+        participants. You only know that each of the other participants has a Y-bonus that is some number between 0 and
+        55.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
