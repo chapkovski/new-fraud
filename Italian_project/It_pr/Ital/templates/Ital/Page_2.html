@@ -43,12 +43,34 @@
     <div class="card">
     <div class="card-body">
 
+    {% if session.config.info and session.config.fraud %}
 
-
-    <p><strong>How is the gain in each period of the ALPHA and BETA parties and candidates A and B determined?</strong>
+    <p>
+        How are your earnings for members of party ALPHA, party BETA, candidates A and B determined in every round? <b>It
+        is very important that you understand this, so please listen carefully.</b>
     </p>
 
-    <p>We will now see so pay attention.</p>
+    <p>
+        Please note that in order to identify the party with a highest number of votes, if anything, it’s necessary to
+        take into account the choice of Candidate A and B about whether to implement electoral fraud or not.
+    </p>
+    {% elif session.config.fraud %}
+    <p>
+        How are your earnings for members of party ALPHA, party BETA, candidates A and B determined in every round? <b>It
+        is very important that you understand this, so please listen carefully.</b>
+    </p>
+
+    <p>
+        Please note that in order to identify the party with a highest number of votes, if anything, it’s necessary to
+        take into account the choice of Candidate A and B about whether to implement electoral fraud or not.
+    </p>
+
+    {% else %}
+
+    <p>
+        How are your earnings for members of party ALPHA, party BETA, candidates A and B determined in every
+        round? <b>It is very important that you understand this, so please listen carefully. </b>
+    </p>
 
     {% next_button %}
 

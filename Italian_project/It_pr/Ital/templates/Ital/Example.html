@@ -45,35 +45,48 @@
 
 
     {% if session.config.fraud or session.config.info %}
-        <p>Let us take an example:</p>
-        <p>Suppose that the cost of subtracting a mark is 20 points. Suppose further that candidate A decides to proceed
-            with vote subtraction while candidate B decides not to use this tool.</p>
-        <p>Finally, suppose that one ALPHA party member and two BETA party members choose to vote.</p>
-        <p>To calculate each participant's payoff we need to take into account that candidate A chooses to subtract one
-            vote and that therefore the ALPHA party has more votes than the BETA party.</p>
-        <p>The participants' payoffs will thus be calculated for this period:</p>
-        <p>- the ALPHA party member who chose to vote will receive 5 points. The other four ALPHA members who chose to
-            abstain will receive 5 points plus their personal Y bonus.</p>
-        <p>- The two BETA party members who chose to vote will receive 105 points while the three other BETA party
-            members who chose to abstain will receive 105 points plus their personal Y bonus.</p>
-        <p>- Finally, candidate A will receive 210-40=170 points while candidate B will receive 60 points.</p>
-        <p>In each period you will be able to see whether it is the ALPHA party or the BETA party that has the most
-            votes in a table that will automatically update at the end of each period. At the end of each period you
-            will also be informed about your earnings in that period and your earnings in previous periods.</p>
+        <p>Let’s make an example :</p>
+        <p>
+            Suppose that in round t the cost of electoral fraud is equal to 20 points and that Candidate A decides to
+            implement electoral fraud while candidate B decides not to implement it. Additionally, suppose that one
+            member of the ALPHA party and two members of the BETA party choose to vote.
+        </p>
+        <p>
+            Therefore, the ALPHA party has more votes than the BETA party.
+        </p>
+        <p>
+            The member of the ALPHA party who chose to vote earns 105 points while the other three members of the ALPHA
+            party who chose to abstain earns 105 points plus his or her own personal Y-bonus; the two members of the
+            BETA party who chose to vote earn 5 points, while the other three members of the BETA party who chose to
+            abstain earns 5 points plus his or her personal Y-bonus.
+        </p>
+        <p>
+            Candidate A will receive 210-20=190 points while candidate B will receive 60 points.
+        </p>
+        <p>
+            The bottom of the screen contains a history panel that will be updated to reflect which party got a highest
+            number of votes in each round. At the end of each round you will be also informed about you earnings in that
+            round and in the previous ones.
+        </p>
 
     {% else %}
-        <p>Let us take an example:</p>
-        <p>Suppose that one component of the ALPHA party and two components of the BETA party choose the VOTE option.
-            The BETA party then has more votes than the ALPHA party.</p>
-        <p>The participants' earnings will thus be calculated for this period:</p>
-        <p>- the ALPHA party member who chose to vote will receive 5 points. The other four ALPHA members who chose to
-            abstain will receive 5 points plus their personal Y bonus.</p>
-        <p>- The two BETA party members who chose to vote will receive 105 points while the three other BETA party
-            members who chose to abstain will receive 105 points plus their personal Y bonus.</p>
-        <p>- Finally, candidate A will receive 60 points while candidate B will receive 210 points.</p>
-        <p>In each period you will be able to see whether it is the ALPHA party or the BETA party that has the most
-            votes in a table that will automatically update at the end of each period. At the end of each period you
-            will also be informed about your earnings in that period and your earnings in previous periods.</p>
+        <p>Let’s make an example:</p>
+        <p>
+            Suppose that one member of the ALPHA party and two members of the BETA party choose to vote. Then the BETA
+            party has more votes than the ALPHA party.
+        </p>
+        <p>
+            The member of the ALPHA party who chose to vote earns 5 points while the other three members of the ALPHA
+            party who chose to abstain earns 5 points plus his or her own personal Y-bonus; the two members of the BETA
+            party who chose to vote earn 105 points, while the other three members of the BETA party who chose to
+            abstain earns 105 points plus his or her personal Y-bonus.
+        </p>
+        <p>
+            Candidate A will receive 60 points while candidate B will receive 210 points.
+            The bottom of the screen contains a history panel that will be updated to reflect which party got a higher
+            number of votes in each round. At the end of each round you will be also informed about you earnings in that
+            round and in the previous ones.
+        </p>
     {% endif %}
 
 

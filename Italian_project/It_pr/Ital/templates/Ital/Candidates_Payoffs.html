@@ -45,38 +45,35 @@
 
 
     {% if session.config.fraud or session.config.info %}
-        <p><strong>Gain for candidate A and candidate B: </strong></p>
-        <p>- If the ALPHA party has more constituents who chose to vote than the BETA party then in this period
-            candidate A
-            will gain 210 points while candidate B will gain 60 points. If candidate A and/or B have chosen to subtract
-            one
-            vote from the other then the cost of this instrument (which can be 20 or 40 points) should be subtracted
-            from
-            their gain.</p>
-        <p>- If the ALPHA party has fewer members who chose to vote than the BETA party then in this period candidate A
-            will
-            gain 60 points and candidate B will gain 210 points. If candidate A and/or B have chosen to subtract one
-            vote
-            from the other then the cost of this instrument (which can be 20 or 40 points) should be subtracted from
-            their
-            gain.</p>
-        <p>- If the ALPHA party and the BETA party have the same number of members who chose to vote then the gain for
-            this
-            period will be 110 points for both candidate A and candidate B. If candidate A and/or B have chosen to
-            subtract
-            one vote from the other then the cost of this (which can be 20 or 40 points) must be subtracted from their
-            gain.</p>
+        <p>
+            <strong>Earnings for candidate A and candidate B: </strong>
+            - If party ALPHA has a greater number of votes than party BETA then candidate A will earn 210 points while
+            candidate B will earn 60 points. If Candidate A and/or candidate B decided to implement electoral fraud, the
+            cost of electoral fraud must be subtracted to his earnings (the cost of electoral fraud is either equal to
+            20 or 40 points);
+            <br/>
+            - If party ALPHA has a lower number of votes than party BETA then candidate A will earn 60 points while
+            candidate B will earn 210 points. If Candidate A and/or candidate B decided to implement electoral fraud,
+            the cost of electoral fraud must be subtracted to his earnings (the cost of electoral fraud is either equal
+            to 20 or 40 points).
+            <br/>
+            - If party ALPHA and party BETA have the same number of votes then both candidates will earn 110 points. If
+            Candidate A and/or candidate B decided to implement electoral fraud, the cost of electoral fraud must be
+            subtracted to his earnings (the cost of electoral fraud is either equal to 20 or 40 points).
+        </p>
 
     {% else %}
-        <p><strong>Gain for candidate A and candidate B: </strong></p>
-        <p>- If the ALPHA party has more constituents who chose to vote than the BETA party then in this period
-            candidate A
-            will earn 210 points while candidate B will earn 60 points.</p>
-        <p>- If the ALPHA party has fewer constituents who chose to vote than the BETA party then in this period
-            candidate A
-            will gain 60 points and candidate B will gain 210 points.</p>
-        <p>- If ALPHA party and BETA party have the same number of constituents who chose to vote then the gain for this
-            period will be 110 points for both candidate A and candidate B.</p>
+        <p>
+            <strong>Earnings for candidate A and candidate B: </strong>
+            <br/>
+            - If party ALPHA has a greater number of votes than party BETA then candidate A will earn 210 points while
+            candidate B will earn 60 points;
+            <br/>
+            - If party ALPHA has a lower number of votes than party BETA then candidate A will earn 60 points while
+            candidate B will earn 210 points;
+            <br/>
+            - If party ALPHA and party BETA have the same number of votes then both candidates will earn 110 points;
+        </p>
     {% endif %}
 
 
