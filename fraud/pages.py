@@ -34,21 +34,14 @@ class Conclusion(Page):
 class Stage_2(Page):
     pass
 
-class CQ(Page):
-    form_fields = [
-        "CQ_1",
-        "CQ_2",
-        "CQ_3",
-        "CQ_4",
-        "CQ_5",
-        "CQ_6",
-        "CQ_7",
-        "CQ_8",
-        "CQ_9",
-        "CQ_10",
-        "CQ_11",
 
-    ]
-
-page_sequence = [Introduction, Page_1, Page_2, Parties_Payoffs, Candidates_Payoffs, Example, Conclusion, CQ, Stage_2
-                 ]
+page_sequence = [
+    Introduction,
+    Page_1,
+    Page_2,
+    Parties_Payoffs,
+    Candidates_Payoffs,
+    Example,
+    Conclusion,
+    Stage_2
+]
