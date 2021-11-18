@@ -24,7 +24,9 @@ class Constants(BaseConstants):
     endowment = 10
 
 class Subsession(BaseSubsession):
-    pass
+    def get_conversion_rate(self):
+        hund_to_euro =self.session.config.get('real_world_currency_per_point')*100
+        return f'100 points = {hund_to_euro}€'
 
 
 class Group(BaseGroup):
