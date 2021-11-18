@@ -1,0 +1,92 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Example
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+
+                    {% if session.config.fraud or session.config.info %}
+                        <p>Let’s make an example :</p>
+                        <p>
+                            Suppose that in round t the cost of electoral fraud is equal to 20 points and that Candidate
+                            A
+                            decides to
+                            implement electoral fraud while candidate B decides not to implement it. Additionally,
+                            suppose that
+                            one
+                            member of the ALPHA party and two members of the BETA party choose to vote.
+                        </p>
+                        <p>
+                            Therefore, the ALPHA party has more votes than the BETA party.
+                        </p>
+                        <p>
+                            The member of the ALPHA party who chose to vote earns 105 points while the other three
+                            members of
+                            the ALPHA
+                            party who chose to abstain earns 105 points plus his or her own personal Y-bonus; the two
+                            members of
+                            the
+                            BETA party who chose to vote earn 5 points, while the other three members of the BETA party
+                            who
+                            chose to
+                            abstain earns 5 points plus his or her personal Y-bonus.
+                        </p>
+                        <p>
+                            Candidate A will receive 210-20=190 points while candidate B will receive 60 points.
+                        </p>
+                        <p>
+                            The bottom of the screen contains a history panel that will be updated to reflect which
+                            party got a
+                            highest
+                            number of votes in each round. At the end of each round you will be also informed about you
+                            earnings
+                            in that
+                            round and in the previous ones.
+                        </p>
+
+                    {% else %}
+                        <p>Let’s make an example:</p>
+                        <p>
+                            Suppose that one member of the ALPHA party and two members of the BETA party choose to vote.
+                            Then
+                            the BETA
+                            party has more votes than the ALPHA party.
+                        </p>
+                        <p>
+                            The member of the ALPHA party who chose to vote earns 5 points while the other three members
+                            of the
+                            ALPHA
+                            party who chose to abstain earns 5 points plus his or her own personal Y-bonus; the two
+                            members of
+                            the BETA
+                            party who chose to vote earn 105 points, while the other three members of the BETA party who
+                            chose
+                            to
+                            abstain earns 105 points plus his or her personal Y-bonus.
+                        </p>
+                        <p>
+                            Candidate A will receive 60 points while candidate B will receive 210 points.
+                            The bottom of the screen contains a history panel that will be updated to reflect which
+                            party got a
+                            higher
+                            number of votes in each round. At the end of each round you will be also informed about you
+                            earnings
+                            in that
+                            round and in the previous ones.
+                        </p>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    {% next_button %}
+
+{% endblock %}

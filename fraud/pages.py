@@ -35,16 +35,26 @@ class Instructions(FirstPage):
 class EarningsIntro(FirstPage):
     pass
 
+
 class EarningsMembersExplained(FirstPage):
     pass
+
+
 class EarningsCandidatesExplained(FirstPage):
     pass
+
+
 class Examples(FirstPage):
     pass
+
+
 class QuizAnnouncement(FirstPage):
     pass
+
+
 class Quiz(FirstPage):
     pass
+
 
 class Parties_Payoffs(Page):
     pass
@@ -62,13 +72,16 @@ class Conclusion(Page):
     pass
 
 
-
-
 page_sequence = [
     Introduction,
     Instructions,
+EarningsIntro,
+EarningsMembersExplained,
+EarningsCandidatesExplained,
+Examples,
+QuizAnnouncement,
+    Quiz,
 
-    Page_2,
     Parties_Payoffs,
     Candidates_Payoffs,
     Example,
