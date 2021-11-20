@@ -56,35 +56,21 @@ class Quiz(FirstPage):
     pass
 
 
-class Parties_Payoffs(Page):
-    pass
 
 
-class Candidates_Payoffs(Page):
-    pass
-
-
-class Example(Page):
-    pass
-
-
-class Conclusion(Page):
-    pass
 
 
 page_sequence = [
     Introduction,
     Instructions,
-EarningsIntro,
-EarningsMembersExplained,
-EarningsCandidatesExplained,
-Examples,
-QuizAnnouncement,
+    EarningsIntro,
+    EarningsMembersExplained,
+    EarningsCandidatesExplained,
+    Examples,
+    QuizAnnouncement,
     Quiz,
 
-    Parties_Payoffs,
-    Candidates_Payoffs,
-    Example,
-    Conclusion,
-    Stage_2
+
+
+
 ]

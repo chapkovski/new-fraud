@@ -22,14 +22,20 @@
                 and
                 a
                 Candidate A; the party BETA, composed by 5 individuals, and a candidate B.
-                <br/>
-                The role of Candidate A and Candidate B are randomly assigned at the beginning of the first part and
-                will
-                remain the same for all the 5 rounds of the first part;
-                <br/>
-                The role of party member of Party ALPHA and of Party BETA will be randomly assigned at the beginning of
-                each
-                round and thus might be different from round to round.
+                <ul>
+                    <li>
+                        The role of Candidate A and Candidate B are randomly assigned at the beginning of the first part
+                        and
+                        will
+                        remain the same for all the 5 rounds of the first part;
+                    </li>
+                    <li>
+                        The role of party member of Party ALPHA and of Party BETA will be randomly assigned at the
+                        beginning of
+                        each
+                        round and thus might be different from round to round.
+                    </li>
+                </ul>
             </li>
             <li class="list-group-item">
                 At the beginning of each round you will be informed about which party you are randomly assigned to or
@@ -50,159 +56,42 @@
                 click
                 on the “OK” button on your screen, as shown in the following screenshot:
             </li>
-            <li class="list-group-item">
-                After every party member has made a choice between voting or abstaining, the earnings for each member of
-                Party
-                ALPHA and Party BETA, as well as the earnings for Candidate A and Candidate B will be shown on the
-                screen.
-            </li>
+            <li class="list-group-item text-center lead"> SCREENSHOT</li>
 
-            {% if session.config.info and session.config.fraud %}
-                <li class="list-group-item">
-                    However, before each member of party ALPHA and BETA decides to vote or to abstain, both candidate A
-                    and
-                    candidate B have the opportunity to subtract a vote to the other party so to add it to their own
-                    party.
-                    The
-                    cost of electoral fraud is randomly selected so that it may vary from round to round. The cost of
-                    electoral
-                    fraud is the same for candidate A and for candidate B and it might be equal either to 20 points or
-                    to 40
-                    points. In each period, all party members and candidates will be informed about the cost of
-                    electoral
-                    fraud.
-                </li>
-                <li class="list-group-item">
-                    Let’s make some examples:
 
-                </li>
+            {% if session.config.fraud %}
+                {% include 'fraud/includes/fraud_block.html' %}
+
+            {% endif %}
+            {% if session.config.info %}
+                {% include 'fraud/includes/info_block.html' %}
+            {% endif %}
+
+
+            {% if subsession.treatment == 'baseline' %}
                 <li class="list-group-item">
-                    Suppose that candidate A decides to implement electoral fraud so to subtract a vote to party BETA in
-                    order
-                    to add it to party ALPHA. Differently, candidate B decides not to implement electoral fraud.
+                    After every party member has made a choice between voting or abstaining, the earnings for each
+                    member of Party ALPHA and Party BETA, as well as the earnings for Candidate A and Candidate B will
+                    be shown on
+                    the screen.
                 </li>
-                <li class="list-group-item">
-                    -If party BETA has at least one member who decides to vote then this vote will be automatically
-                    subtracted
-                    from party BETA and added to party ALPHA
-                </li>
-                <li class="list-group-item">
-                    - If no member of party BETA decides to vote then a vote will be automatically added to party ALPHA
-                    while
-                    for party BETA nothing changes.&nbsp;
-                </li>
-                <li class="list-group-item">
-                    Suppose that both candidate A and candidate B decide to implement electoral fraud. In this case
-                    nothing
-                    changes.
-                </li>
+            {% endif %}
+            {% if subsession.treatment == 'fraud_only' %}
                 <li class="list-group-item">
                     Once both candidate A and candidate B have decided whether to implement electoral fraud or not and
-                    they’ve
-                    been mutually informed about it, each candidate decides which of the following messages to send to
-                    all
-                    members of both Party Alpha and Party BETA.
-
-                </li>
-                <li class="list-group-item">One of the following messages is chosen by candidate A:
-                </li>
-                <li class="list-group-item">
-                    - Candidate B decided to implement electoral fraud so to subtract one vote from Party ALPHA.
-                </li>
-                <li class="list-group-item">
-                    - Candidate B decided NOT to implement electoral fraud so to subtract one vote from Party ALPHA
-                </li>
-                <li class="list-group-item">
-                    - Nothing to communicate
-
-                </li>
-                <li class="list-group-item">One of the following messages is chosen by candidate B
-                </li>
-                <li class="list-group-item">
-                    - Candidate A decided to implement electoral fraud so to subtract one vote from Party BETA
-                </li>
-                <li class="list-group-item">
-                    - Candidate A decided NOT to implement electoral fraud so to subtract one vote from Party BETA
-                </li>
-                <li class="list-group-item">
-                    - Nothing to communicate
-                </li>
-                <li class="list-group-item">
-                    Finally, after all members of Party ALPHA and BETA have received both the message of Candidate A and
-                    of
-                    Candidate B, every party member will made a choice between voting or abstaining. The earnings for
-                    each
-                    member of Party ALPHA and Party BETA, as well the earnings for Candidate A and Candidate B will be
-                    then
-                    showed on the screen.
-                </li>
-                <li class="list-group-item">
+                    they’ve been mutually been informed about it, every party member will made a choice between voting
+                    or abstaining.
                     Members of party ALPHA and of party BETA will never been informed, both during the experiment or
-                    after
-                    it,
-                    about whether candidate A or candidate B actually decided to implement electoral fraud or not.
-                </li>
-
-            {% elif session.config.fraud %}
-                <li class="list-group-item">
-                    However, before the ALPHA and BETA party members decide whether to vote or abstain, candidate A and
-                    candidate
-                    B have the option of subtracting a vote from the other party and adding it to their own party. The
-                    cost
-                    of
-                    this operation is the same for both candidate A and candidate B, it varies from period to period and
-                    can
-                    be
-                    20 points or 40 points, and in each period all participants will be informed of its amount.
-                </li>
-                <li class="list-group-item">
-                    Let us take an example:
-                </li>
-                <li class="list-group-item">
-                    Suppose that candidate A decides to implement electoral fraud so to subtract a vote to party BETA in
-                    order
-                    to add it to party ALPHA. Differently, candidate B decides not to implement electoral fraud.
-                </li>
-                <li class="list-group-item">
-                    -If party BETA has at least one member who decides to vote then this vote will be automatically
-                    subtracted
-                    from party BETA and added to party ALPHA
-                </li>
-                <li class="list-group-item">
-                    - If no member of party BETA decides to vote then a vote will be automatically added to party ALPHA
-                    while
-                    for party BETA nothing changes.&nbsp;
-                </li>
-                <li class="list-group-item">
-                    Suppose both candidate A and candidate B have decided to subtract a vote from the other party, in
-                    this
-                    case
-                    there will be no change in the vote count for the two parties.
-                </li>
-                <li class="list-group-item">
-                    Once both candidate A and candidate B have decided whether to implement electoral fraud or not and
-                    they’ve
-                    been mutually been informed about it, every party member will made a choice between voting or
-                    abstaining.
-                    Members of party ALPHA and of party BETA will never been informed, both during the experiment or
-                    after
-                    it,
-                    about whether candidate A or candidate B actually decided to implement electoral fraud or not.
+                    after it, about whether candidate A or candidate B actually decided to implement electoral fraud or
+                    not.
                 </li>
                 <li class="list-group-item">
                     Finally, the earnings for each member of Party ALPHA and Party BETA, as well the earnings for
-                    Candidate A
-                    and
-                    Candidate B will be shown on the screen.
-                </li>
-            {% else %}
-                <li class="list-group-item">
-                    After every party member has made a choice between voting or abstaining, the earnings for each
-                    member of
-                    Party ALPHA and Party BETA, as well as the earnings for Candidate A and Candidate B will be shown on
-                    the
-                    screen.
+                    Candidate A and Candidate B will be shown on the screen.
+
                 </li>
             {% endif %}
+            </li>
+        </ul>
     </div>
 </div>
