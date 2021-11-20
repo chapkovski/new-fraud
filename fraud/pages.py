@@ -64,13 +64,13 @@ class Quiz(FirstPage):
 
 
 page_sequence = [
-    # Introduction,
-    # Instructions,
-    # EarningsIntro,
-    # EarningsMembersExplained,
-    # EarningsCandidatesExplained,
-    # Examples,
-    # QuizAnnouncement,
+    Introduction,
+    Instructions,
+    EarningsIntro,
+    EarningsMembersExplained,
+    EarningsCandidatesExplained,
+    Examples,
+    QuizAnnouncement,
     Quiz,
 
 ]
