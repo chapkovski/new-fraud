@@ -65,10 +65,28 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     def role(self):
         return self.session.config.get('role')
+
     party = models.StringField()
-    vote = models.BooleanField()
-    fraud = models.BooleanField()
-    info = models.BooleanField()
+    vote = models.BooleanField(choices=[(False, 'ABSTAIN'), (True, 'VOTE')], widget=widgets.RadioSelectHorizontal)
+    fraud = models.BooleanField(choices=[
+        (False, 'Not implement the electoral fraud'),
+        (True, 'Implement the electoral fraud')
+    ], widget=widgets.RadioSelectHorizontal)
+    info = models.IntegerField(
+        widget=widgets.RadioSelect)
+    def get_other_candidate_name(self):
+        if self.party == 'ALPHA': return 'B'
+        return 'A'
+
+    def info_choices(self):
+
+        choices = [
+            (0, f'Candidate {self.get_other_candidate_name()} decided to implement electoral fraud so to subtract one vote from Party {self.party}'),
+            (1, f'Candidate {self.get_other_candidate_name()} decided NOT implement  electoral fraud so to subtract one vote from Party {self.party}'),
+            (2, 'Nothing to communicate')
+        ]
+        return choices
+
     # cq_block
     cq_1 = models.IntegerField(label='How many members are in the Alpha party?',
                                choices=[4, 5, 9],
