@@ -1,5 +1,7 @@
-# oTree-may-overwrite-this-file
-# IF YOU MODIFY THIS FILE, remove this comment.
-# otherwise, oTree will automatically overwrite it.
-otree>=3.2.3
-psycopg2>=2.8.4
+otree==3.4.0
+psycopg2==2.8.6
+pandas
+pyyaml
+Markdown
+MarkupSafe
+django_user_agents
