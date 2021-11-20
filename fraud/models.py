@@ -44,4 +44,61 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    # cq_block
+    cq_1 = models.IntegerField(label='How many members are in the Alpha party?',
+                               choices=[4, 5, 9],
+                               widget=widgets.RadioSelect)
+    cq_2 = models.IntegerField(label='How many members are in the Beta party?',
+                               choices=[4, 5, 9],
+                               widget=widgets.RadioSelect
+                               )
+    cq_3 = models.IntegerField(label='Is the role of member of party ALPHA or BETA randomly assigned in each round?',
+                               choices=[(1, 'Yes'), (0, 'No'), ],
+                               widget=widgets.RadioSelect
+                               )
+    cq_4 = models.IntegerField(label='Is the role of candidate A and B randomly assigned in each round?',
+                               choices=[(1, 'Yes'), (0, 'No'), ],
+                               widget=widgets.RadioSelect)
+    cq_5 = models.IntegerField(
+        label='Is the Y bonus of one party member necessarily the same as other members of the same party?',
+        choices=[(1, 'Yes'), (0, 'No'), ],
+        widget=widgets.RadioSelect)
+    cq_6 = models.IntegerField(label="""
+    Suppose in round 3 you are randomly assigned to be a member of the Beta party. Moreover, suppose your randomly assigned Y bonus in this round is equal to 21 points.
+    <br><b>Suppose you choose to abstain.</b><br>
+Totally (you are included), three members of the Beta party and four members of the Alpha party chose to vote. How many points do you earn in this round?""",
+                               choices=[5, 21, 26, 55, 76, 105],
+                               widget=widgets.RadioSelect
+                               )
+    cq_7 = models.IntegerField(label="""
+       
+        <br><b>Suppose you choose to vote.</b><br>
+    Totally (you are included), four members of the Beta party and four members of the Alpha party chose to vote. How many points do you earn in this round?""",
+                               choices=[5, 21, 26, 55, 76, 105],
+                               widget=widgets.RadioSelect
+                               )
+    cq_8 = models.IntegerField(label="""
+Suppose you are randomly assigned the role of Candidate A. Moreover, suppose the cost of electoral fraud in this round is equal to 40 points
+            <br><b>Suppose you and candidate B both decide not to implement electoral fraud. </b><br>
+        Totally, four members of the Beta party and four members of the Alpha party chose to vote. How many points do you earn in this round?""",
+                               choices=[5, 60, 70, 110, 170, 210],
+                               widget=widgets.RadioSelect
+                               )
+    cq_9 = models.IntegerField(label="""
+   How many points does candidate B earn in this round?""",
+                               choices=[5, 60, 70, 110, 170, 210],
+                               widget=widgets.RadioSelect
+                               )
+    cq_10 = models.IntegerField(label="""
+    <b>Suppose you decide to implement electoral fraud while candidate B does not.  </b><br>
+            Totally, four members of the Beta party and four members of the Alpha party chose to vote. How many points do you earn in this round?""",
+                                choices=[5, 60, 70, 110, 170, 210],
+                                widget=widgets.RadioSelect
+                                )
+    cq_11 = models.IntegerField(label="""
+      How many points does candidate B earn in this round?""",
+                                choices=[5, 60, 70, 110, 170, 210],
+                                widget=widgets.RadioSelect
+                                )
+
+    # cq_block END

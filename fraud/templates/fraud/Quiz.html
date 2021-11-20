@@ -2,19 +2,13 @@
 {% load otree %}
 
 {% block title %}
-    General introduction
+    Comprehension check
 {% endblock %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    {% next_button %}
+{% autoescape off %}
+{% formfields %}
+{% endautoescape %}
+{% next_button %}
 
 {% endblock %}

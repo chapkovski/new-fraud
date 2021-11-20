@@ -53,24 +53,24 @@ class QuizAnnouncement(FirstPage):
 
 
 class Quiz(FirstPage):
-    pass
+    form_model = 'player'
 
-
-
-
+    def get_form_fields(self):
+        qs = [f'cq_{i}' for i in range(1, 8)]
+        if self.subsession.treatment != 'baseline':
+            toadd = [f'cq_{i}' for i in range(8, 12)]
+            qs.extend(toadd)
+        return qs
 
 
 page_sequence = [
-    Introduction,
-    Instructions,
-    EarningsIntro,
-    EarningsMembersExplained,
-    EarningsCandidatesExplained,
-    Examples,
-    QuizAnnouncement,
+    # Introduction,
+    # Instructions,
+    # EarningsIntro,
+    # EarningsMembersExplained,
+    # EarningsCandidatesExplained,
+    # Examples,
+    # QuizAnnouncement,
     Quiz,
-
-
-
 
 ]
