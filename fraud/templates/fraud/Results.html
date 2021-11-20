@@ -1,13 +1,20 @@
 {% extends "global/Page.html" %}
-{% load otree static %}
+{% load otree %}
 
 {% block title %}
-    Page title
+   Results. Round {{ view.round_number  }} out of {{ Constants.num_rounds }}
 {% endblock %}
 
 {% block content %}
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                </li>
+            </ul>
+        </div>
+    </div>
 
     {% next_button %}
+
 {% endblock %}
-
-

@@ -8,6 +8,7 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
+import random, json
 
 author = 'Philipp Chapkovski, HSE-Moscow'
 
@@ -21,11 +22,16 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     endowment = 10
+    parties = ['ALPHA', 'BETA']
 
 
 class Subsession(BaseSubsession):
     treatment = models.StringField()
+    # NB! TODO THAT IS FOR DEBUGGING ONLY - MOVE TO GROUPS!!!
+    other_fraud_committed = models.BooleanField()
+    party_win = models.StringField()
 
+    # END OF THAT IS FOR DEBUGGING ONLY - MOVE TO GROUPS!!!
     def creating_session(self):
         if self.session.config.get('fraud') and self.session.config.get('info'):
             self.treatment = 'fraud_info'
@@ -33,6 +39,19 @@ class Subsession(BaseSubsession):
             self.treatment = 'fraud_only'
         else:
             self.treatment = 'baseline'
+        # TODO: the following for debugging only.
+        if self.round_number == 1 and self.session.config.get('role') == 'candidate':
+            for p in self.session.get_participants():
+                p.vars['party'] = random.choice(Constants.parties)
+
+        if self.session.config.get('role') == 'voter':
+            self.party_win = random.choice(Constants.parties)
+            for p in self.get_players():
+                p.party = random.choice(Constants.parties)
+        if self.session.config.get('role') == 'candidate':
+            self.other_fraud_committed = random.choice([True, False])
+            for p in self.get_players():
+                p.party = p.participant.vars.get('party')
 
     def get_conversion_rate(self):
         hund_to_euro = self.session.config.get('real_world_currency_per_point') * 100
@@ -44,6 +63,12 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    def role(self):
+        return self.session.config.get('role')
+    party = models.StringField()
+    vote = models.BooleanField()
+    fraud = models.BooleanField()
+    info = models.BooleanField()
     # cq_block
     cq_1 = models.IntegerField(label='How many members are in the Alpha party?',
                                choices=[4, 5, 9],

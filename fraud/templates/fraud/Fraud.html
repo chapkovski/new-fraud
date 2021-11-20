@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Fraud decision. Round {{ view.round_number  }} out of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+  {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

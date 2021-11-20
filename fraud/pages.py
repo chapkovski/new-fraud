@@ -63,14 +63,46 @@ class Quiz(FirstPage):
         return qs
 
 
+class Vote(Page):
+    form_model = 'player'
+    form_fields = ['vote']
+
+    def is_displayed(self):
+        return self.player.role() == 'voter'
+
+
+class Fraud(Page):
+    form_model = 'player'
+    form_fields = ['fraud']
+
+    def is_displayed(self):
+        return self.player.role() == 'candidate' and self.session.config.get('fraud')
+
+
+class Info(Page):
+    form_model = 'player'
+    form_fields = ['info']
+
+    def is_displayed(self):
+        return self.player.role() == 'candidate' and self.session.config.get('info')
+
+
+class Results(Page):
+    pass
+
+
 page_sequence = [
-    Introduction,
-    Instructions,
-    EarningsIntro,
-    EarningsMembersExplained,
-    EarningsCandidatesExplained,
-    Examples,
-    QuizAnnouncement,
-    Quiz,
+    # Introduction,
+    # Instructions,
+    # EarningsIntro,
+    # EarningsMembersExplained,
+    # EarningsCandidatesExplained,
+    # Examples,
+    # QuizAnnouncement,
+    # Quiz,
+    Vote,
+    Fraud,
+    Info,
+    Results,
 
 ]
