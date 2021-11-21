@@ -20,7 +20,7 @@ Fraud expectations. Maggian, Baghdasaryan, Chapkovski
 class Constants(BaseConstants):
     name_in_url = 'fraud'
     players_per_group = None
-    num_rounds = 3
+    num_rounds = 5
     endowment = 10
     parties = ['ALPHA', 'BETA']
     fraud_cost = 40
@@ -33,9 +33,9 @@ class Constants(BaseConstants):
             win=105
         ),
         candidate=dict(
-            loss=210,
+            loss=60,
             tie=110,
-            win=60
+            win=210
         ),
     )
     fraud_correspondence = {
@@ -75,9 +75,9 @@ class Subsession(BaseSubsession):
         if self.round_number == 1 and self.session.config.get('role') == 'candidate':
             for p in self.session.get_participants():
                 p.vars['party'] = random.choice(Constants.parties)
-
+        self.party_win = random.choice(Constants.parties)
         if self.session.config.get('role') == 'voter':
-            self.party_win = random.choice(Constants.parties)
+
             self.voters_informed = random.choice([True, False])
             for p in self.get_players():
                 p.y = random.randint(Constants.lby, Constants.uby)
@@ -131,7 +131,9 @@ class Player(BasePlayer):
     info = models.IntegerField(
         label='Please, choose the message you would like to send to the voters:',
         widget=widgets.RadioSelect)
-
+    def get_candidate_name(self):
+        if self.party == 'ALPHA': return 'AB'
+        return 'B'
     def get_other_candidate_name(self):
         if self.party == 'ALPHA': return 'B'
         return 'A'
