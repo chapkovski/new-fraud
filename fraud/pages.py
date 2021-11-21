@@ -70,6 +70,10 @@ class Vote(Page):
     def is_displayed(self):
         return self.player.role() == 'voter'
 
+    def before_next_page(self):
+        # TODO: for debugging only
+        self.player.set_payoffs()
+
 
 class Fraud(Page):
     form_model = 'player'
@@ -77,6 +81,10 @@ class Fraud(Page):
 
     def is_displayed(self):
         return self.player.role() == 'candidate' and self.session.config.get('fraud')
+
+    def before_next_page(self):
+        # TODO: for debugging only
+        self.player.set_payoffs()
 
 
 class Info(Page):
