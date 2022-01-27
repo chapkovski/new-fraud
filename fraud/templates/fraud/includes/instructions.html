@@ -5,10 +5,18 @@
                 Now we are explaining you the detailed instructions for the first part of the experiment. The first part
                 consists of 5 rounds.
             </li>
+
+            <li class="list-group-item">
+                Part 1 consists of {{ Constants.num_rounds }} rounds and in each round of Part 1 you have to make some
+                decisions. At the end of
+                the study, we will randomly select one round of the first part and pay to you in private in cash the
+                earnings you obtained in that round.
+            </li>
             <li class="list-group-item">
                 At the beginning of the first part you will be randomly and anonymously assigned to groups composed by
                 11
-                individuals each. The group composition will remain the same for all the 5 rounds of the first part of
+                individuals each. The group composition will remain the same for all the {{ Constants.num_rounds }}
+                rounds of the first part of
                 the
                 experiment. You will never know the identity of the other members of your group, nor during the
                 experiment,
@@ -18,45 +26,36 @@
             </li>
             <li class="list-group-item">
 
-                Within each group composed by 11 participants, there will be the ALPHA party, composed by 4 individuals,
-                and
-                a
-                Candidate A; the party BETA, composed by 5 individuals, and a candidate B.
+                Within each group composed by 11 participants, there will be: the ALPHA party, composed by 4 members,
+                and a Candidate A; the party BETA, composed by 5 members, and a candidate B.
                 <ul>
                     <li>
-                        The role of Candidate A and Candidate B are randomly assigned at the beginning of the first part
-                        and
-                        will
-                        remain the same for all the 5 rounds of the first part;
+                        The role of Candidate A and Candidate B are randomly assigned at the beginning of the first
+                        part and will remain the same for all the {{ Constants.num_rounds }} rounds of the first part;
                     </li>
                     <li>
-                        The role of party member of Party ALPHA and of Party BETA will be randomly assigned at the
-                        beginning of
-                        each
-                        round and thus might be different from round to round.
+                        The role of member of Party ALPHA and of Party BETA will be randomly assigned at the beginning
+                        of each round and thus might be different from round to round.
                     </li>
                 </ul>
             </li>
             <li class="list-group-item">
                 At the beginning of each round you will be informed about which party you are randomly assigned to or
-                whether
-                you are randomly assigned the role of Candidate A or Candidate B.
+                whether you are randomly assigned to the role of Candidate A or Candidate B.
             </li>
             <li class="list-group-item">
                 Moreover, to each member of Party ALPHA and of Party BETA it will be also randomly assigned a bonus Y.
-                We
-                will
-                explain what this means in a moment.
+                We will explain what this means in a moment.
             </li>
             <li class="list-group-item">
-                After that, each member of Party ALPHA and of Party BETA will be asked to choose one option out of two:
-                option
-                “VOTE” or option “ABSENTION”. In order to make a choice you just have to select one of the two options
-                and
-                click
-                on the “OK” button on your screen, as shown in the following screenshot:
+                After that, each of Party ALPHA and of Party BETA will be asked to choose one option out of two: option
+                “VOTE” or option “ABSENTION”.
             </li>
-            <li class="list-group-item text-center lead"> SCREENSHOT</li>
+            <li class="list-group-item">
+                At the end of each round both candidates A and B, as well as members of Party ALPHA and BETA will see
+                which party has the highest number of votes as well as their own payoff for that round.
+            </li>
+
 
 
             {% if session.config.fraud %}
@@ -68,26 +67,18 @@
             {% endif %}
 
 
-            {% if subsession.treatment == 'baseline' %}
-                <li class="list-group-item">
-                    After every party member has made a choice between voting or abstaining, the earnings for each
-                    member of Party ALPHA and Party BETA, as well as the earnings for Candidate A and Candidate B will
-                    be shown on
-                    the screen.
-                </li>
-            {% endif %}
             {% if subsession.treatment == 'fraud_only' %}
                 <li class="list-group-item">
-                    Once both candidate A and candidate B have decided whether to implement electoral fraud or not and
-                    they’ve been mutually been informed about it, every party member will made a choice between voting
-                    or abstaining.
-                    Members of party ALPHA and of party BETA will never been informed, both during the experiment or
-                    after it, about whether candidate A or candidate B actually decided to implement electoral fraud or
+                    Once both candidate A and candidate B have decided whether to implement electoral fraud or not, they
+                    will be mutually informed about it. Differently, members of party ALPHA and BETA will never be
+                    informed about whether candidate A or candidate B actually decided to implement electoral fraud or
                     not.
+                    Finally, every party member will made a choice between voting or abstaining.
+
                 </li>
                 <li class="list-group-item">
-                    Finally, the earnings for each member of Party ALPHA and Party BETA, as well the earnings for
-                    Candidate A and Candidate B will be shown on the screen.
+                    At the end of each round both candidates A and B, as well as members of Party ALPHA and BETA will
+                    see which party has the highest number of votes as well as their own payoff for that round.
 
                 </li>
             {% endif %}
