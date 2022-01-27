@@ -56,11 +56,17 @@ class Quiz(FirstPage):
     form_model = 'player'
 
     def get_form_fields(self):
-        qs = [f'cq_{i}' for i in range(1, 8)]
-        if self.subsession.treatment != 'baseline':
-            toadd = [f'cq_{i}' for i in range(8, 12)]
-            qs.extend(toadd)
-        return qs
+        base = [f'cq_{i}' for i in range(1, 6)]
+        if self.subsession.treatment == 'baseline':
+            toadd = [f'cq_{i}' for i in [6, 7]]
+            base.extend(toadd)
+        if self.subsession.treatment == 'fraud_only':
+            toadd = [f'cq_{i}' for i in [8, 9, 10, 11]]
+            base.extend(toadd)
+        if self.subsession.treatment == 'fraud_info':
+            toadd = [f'cq_{i}' for i in [12, 13, 14, 15]]
+            base.extend(toadd)
+        return base
 
 
 class Vote(Page):
