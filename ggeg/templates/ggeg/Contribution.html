@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree i18n %}
+
+{% block title %}
+     Contribution to the common project.
+{% endblock %}
+
+{% block content %}
+    <div class="alert alert-info">
+        <h5>{% trans 'Your endowment is:' %} <span class="income"><u>{{ player.endowment }}</u></span></h5>
+    </div>
+    {% trans 'Please indicate how much you would like to invest into a project (from 0 to 100 points)' as lab %}
+    {% formfield player.contribution label=lab %}
+    <div class="my-3">
+        {% next_button %}
+    </div>
+
+    {% include 'ggeg/includes/ggeg_instruction_toggler.html' %}
+{% endblock %}

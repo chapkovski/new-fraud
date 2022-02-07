@@ -188,65 +188,22 @@ Totally, three members of the BETA party and four members of the ALPHA party cho
                                )
 
     # END OF BASELINE ONLYE
-    # FRAUD ONLY
-    cq_8 = models.IntegerField(label="""Suppose the following situation: 
-In round 3 the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decides not to implement electoral fraud. 
-A member of the BETA party is randomly assigned a Y bonus equal to 21 points and decides to abstain.
-Totally, three members of the BETA party and four members of the ALPHA party choose to vote. How many points does the above described member of the BETA party earn in this round?
-""",
+    # FRAUD OR FRAUD+INFO ONLY
+    cq_8 = models.IntegerField(label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decide not to implement electoral fraud. A member of the BETA party is randomly assigned a Y bonus equal to 21 points and decides to abstain. In Total, three members of the BETA party and four members of the ALPHA party chose to vote. How many points does the above described member of the BETA party earn in this round?""",
                                choices=[5, 21, 26, 55, 76, 105],
                                widget=widgets.RadioSelect
                                )
-    cq_9 = models.IntegerField(label="""
-   Suppose the following situation: 
-In round 3 the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decides not to implement electoral fraud. 
-Totally, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A  earn in this round?
-""",
+    cq_9 = models.IntegerField(label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decide not to implement electoral fraud. In Total, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A earn in this round?""",
                                choices=[5, 60, 70, 110, 170, 210],
                                widget=widgets.RadioSelect
                                )
-    cq_10 = models.IntegerField(label="""Suppose the following situation: 
-In round 3 the cost of electoral fraud is equal to 20 points. Candidate A decides to implement electoral fraud  while Candidate B does not. 
-Totally, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A earn in this round?
-
-""",
+    cq_10 = models.IntegerField(label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 20 points. Candidate A decides to implement electoral fraud while Candidate B does not. In Total, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A earn in this round?""",
                                 choices=[5, 60, 70, 110, 190, 210],
                                 widget=widgets.RadioSelect
                                 )
-    cq_11 = models.IntegerField(label="""
-      How many points does Candidate B earn in this round?""",
+    cq_11 = models.IntegerField(label="""How many points does Candidate B earn in this round?""",
                                 choices=[5, 60, 70, 110, 170, 210],
                                 widget=widgets.RadioSelect
                                 )
 
     # END OF FRAUD ONLY
-    # FRAUD + INFO
-    cq_12 = models.IntegerField(label="""Suppose the following situation: 
-In round 3 the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decides not to implement electoral fraud. Candidate A sends the message “Nothing to communicate” while Candidate B send the message “Candidate A decided to implement electoral fraud so to subtract one vote from Party ALPHA”
-A member of the BETA party is randomly assigned a Y bonus equal to 21 points and decides to abstain.
-Totally, three members of the BETA party and four members of the ALPHA party choose to vote. How many points does the above described member of the BETA party earn in this round?
-
-    """,
-                                choices=[5, 21, 26, 55, 76, 105],
-                                widget=widgets.RadioSelect
-                                )
-    cq_13 = models.IntegerField(label="""Suppose the following situation: 
-In round 3 the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decide not to implement electoral fraud. Candidate A sends the message “Candidate B decided to implement electoral fraud so to subtract one vote from Party ALPHA” while Candidate B send the message “Nothing to communicate”
-Totally, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A  earn in this round?
-
-    """,
-                                choices=[5, 60, 70, 110, 170, 210],
-                                widget=widgets.RadioSelect
-                                )
-    cq_14 = models.IntegerField(label="""Suppose the following situation: 
-In round 3 the cost of electoral fraud is equal to 20 points. Candidate A decides to implement electoral fraud while Candidate B does not. Both candidates send the message “Nothing to communicate”.
-Totally, four members of the Beta party and four members of the Alpha party chose to vote. How many points does Candidate A earn in this round?""",
-                                choices=[5, 60, 70, 110, 190, 210],
-                                widget=widgets.RadioSelect
-                                )
-    cq_15 = models.IntegerField(label="""
-          How many points does Candidate B earn in this round?""",
-                                choices=[5, 60, 70, 110, 170, 210],
-                                widget=widgets.RadioSelect
-                                )
-    # END OFFRAUD + INFO

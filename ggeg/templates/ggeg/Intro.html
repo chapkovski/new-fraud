@@ -1,0 +1,48 @@
+{% extends "global/Page.html" %}
+{% load otree i18n %}
+
+{% block title %}
+    {% trans 'La seconda parte' %}
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    La prima parte dell'esperimento è terminata.
+                </li>
+                <li class="list-group-item">
+                    Ora inizierà la seconda parte.
+                </li>
+                <li class="list-group-item">
+                    La seconda parte dell'esperimento dura 5 periodi. In ogni periodo della seconda parte, sia tu che
+                    gli alti 4
+                    membri del tuo gruppo, con i quali hai interagito nella prima parte dell’esperimento, riceverete un
+                    ammontare di punti pari a 100.
+                </li>
+                <li class="list-group-item">
+
+                    In ogni periodo sia tu che gli altri membri del tuo gruppo dovrete scegliere quanti di questi 100
+                    punti
+                    tenere e quanti investire in un progetto.
+                </li>
+                <li class="list-group-item">
+                    I punti che investirai nel progetto saranno raddoppiati e saranno poi equamente distribuiti tra I 4
+                    componenti del tuo gruppo, tu escluso.
+                </li>
+                <li class="list-group-item">
+                    Allo stesso modo, l’ammontare di punti investito da ciascun membro del tuo gruppo, per esempio dal
+                    soggetto A, saranno raddoppiati e distribuiti equamente tra te e gli altri 3 membri del tuo gruppo,
+                    escluso
+                    quindi il
+                    soggetto A.
+                </li>
+        </div>
+    </div>
+    <div class="my-3">
+        {% next_button %}
+    </div>
+
+
+{% endblock %}

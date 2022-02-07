@@ -2,13 +2,16 @@
 {% load i18n %}
 {% load otree static %}
 {% comment %}
-NOTE:
-we should keep this page as simple as possible so that 'view source' is friendly
-i removed many linebreaks to make output HTML cleaner
+    NOTE:
+    we should keep this page as simple as possible so that 'view source' is friendly
+    i removed many linebreaks to make output HTML cleaner
 {% endcomment %}
 {% block body_main %}
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css"
-          as="style">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="preload" as="script" href="{% static 'global/js/survey.jquery.min.js' %}">
     <script src="{% static 'global/js/survey.jquery.min.js' %}"></script>
@@ -23,7 +26,8 @@ i removed many linebreaks to make output HTML cleaner
 
         <nav class="navbar navbar-light bg-light  d-flex fixed-top">
 
-            <div class="progress " style="height: 30px; flex-basis:100%">
+            <div class="progress "
+                 style="height: 30px;  {% if instructions %}width:calc(100% - 150px){% else %}width:100%{% endif %}">
                 <div class="progress-bar" role="progressbar" style="width: {{ progress }}%"
                      aria-valuenow="{{ progress }}"
                      aria-valuemin="0" aria-valuemax="100">
@@ -31,8 +35,54 @@ i removed many linebreaks to make output HTML cleaner
             </div>
 
 
+            {% if instructions %}
+
+
+                <div class="mx-1 mx-auto">
+                    <button class="btn   btn-success" data-toggle="modal" data-target="#instructionsModal">
+                        Instructions
+                    </button>
+                </div>
+
+
+
+            {% endif %}
+
         </nav>
     {% endblock %}
+
+    {% if instructions %}
+        <!-- Modal -->
+        <div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Instructions</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% include 'fraud/includes/instructions.html' %}
+
+                        {% include 'fraud/includes/earnings_member.html' %}
+
+
+                        {% include 'fraud/includes/earnings_candidate.html' %}
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endif %}
+
+
     <div class="otree-body container">
         <h2 class="otree-title page-header">
 

@@ -1,0 +1,47 @@
+ <div class="card my-3">
+        <div class="card-body">
+
+
+            <p class="text-center lead ">
+                <strong>Earnings for candidate A and candidate B </strong>
+            </p>
+            <ul class="list-group list-group-flush">
+                {% if  subsession.treatment == 'baseline' %}
+                    <li class="list-group-item">
+                        If party ALPHA has a greater number of votes than party BETA then candidate A will earn 210
+                        points
+                        while candidate B will earn 60 points.
+                    </li>
+                    <li class="list-group-item">
+                        If party ALPHA has a lower number of votes than party BETA then candidate
+                        A will earn 60 points while candidate B will earn 210 points.
+                    </li>
+                    <li class="list-group-item">
+                        If party ALPHA and party BETA have the same number of votes then both candidates will earn 110
+                        points.
+                    </li>
+                {% else %}
+                    <li class="list-group-item">
+                        If party ALPHA has a greater number of votes than party BETA then candidate A will earn 210
+                        points while candidate B will earn 60 points. If Candidate A and/or candidate B decided to
+                        implement electoral fraud, the cost of electoral fraud must be subtracted to his earnings (the
+                        cost of electoral fraud is either equal to 20 or 40 points).
+                    </li>
+                    <li class="list-group-item">
+                        If party ALPHA has a lower number of votes than party BETA then candidate A will earn 60
+                        points while candidate B will earn 210 points. If Candidate A and/or candidate B decided to
+                        implement electoral fraud, the cost of electoral fraud must be subtracted to his earnings (the
+                        cost of electoral fraud is either equal to 20 or 40 points).
+                    </li>
+                    <li class="list-group-item">
+                        If party ALPHA and party BETA have the same number of votes then both candidates will earn 110
+                        points. If Candidate A and/or candidate B decided to implement electoral fraud, the cost of
+                        electoral fraud must be subtracted to his earnings (the cost of electoral fraud is either equal
+                        to 20 or 40 points).
+                    </li>
+                {% endif %}
+
+
+            </ul>
+        </div>
+    </div>

@@ -53,6 +53,7 @@ class QuizAnnouncement(FirstPage):
 
 
 class Quiz(FirstPage):
+    instructions = True
     form_model = 'player'
 
     def get_form_fields(self):
@@ -60,12 +61,10 @@ class Quiz(FirstPage):
         if self.subsession.treatment == 'baseline':
             toadd = [f'cq_{i}' for i in [6, 7]]
             base.extend(toadd)
-        if self.subsession.treatment == 'fraud_only':
+        else:
             toadd = [f'cq_{i}' for i in [8, 9, 10, 11]]
             base.extend(toadd)
-        if self.subsession.treatment == 'fraud_info':
-            toadd = [f'cq_{i}' for i in [12, 13, 14, 15]]
-            base.extend(toadd)
+
         return base
 
 

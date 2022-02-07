@@ -1,0 +1,14 @@
+{% load otree i18n %}
+
+    <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#instruction_wrapper"
+                aria-expanded="false" aria-controls="instruction_wrapper" id="instruction_toggler">
+            Instructions
+        </button>
+    </p>
+    <div class="collapse mb-3" id="instruction_wrapper">
+        {% include 'ggeg/includes/ggeg_instructions_block.html' %}
+
+
+    </div>
+    <script src="{% static "ggeg/js/instruction_toggle.js" %}"></script>

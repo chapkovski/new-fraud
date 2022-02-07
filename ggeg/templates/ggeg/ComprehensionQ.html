@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load otree i18n %}
+
+{% block title %}
+    {% trans 'Comprehension questions for the second part' %}
+{% endblock %}
+
+{% block content %}
+    <div class="card my-3">
+        <div class="card-body">
+
+            Suppose subject A invested the entire amount available to him  in the group project, i.e. 100
+            points. The other members of his group have not invested any points in the project.
+
+
+            {% formfield player.cq_ggeg_1 %}
+            {% formfield player.cq_ggeg_2 %}
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body"> Suppose subject A invested nothing in the project. Each of the other 6
+            members of his/her group invested their entire endowment (100 points).
+
+            {% formfield player.cq_ggeg_3 %}
+        </div>
+    </div>
+    <div class="my-3">
+        {% next_button %}
+    </div>
+    {% include 'ggeg/includes/ggeg_instruction_toggler.html' %}
+
+
+{% endblock %}

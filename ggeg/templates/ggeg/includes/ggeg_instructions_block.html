@@ -1,0 +1,75 @@
+{% load otree humanize i18n %}
+
+<div class="card my-3">
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+
+
+
+            <li class="list-group-item">
+                In Part 2 both you and the other 6 members of your group, with whom you interacted in
+                the first part of the experiment, will receive an amount of points equal to 100.
+
+            </li>
+            <li class="list-group-item">
+                You and the other members of your group will have to
+                choose how many points out of 100 points to keep and how many to invest in a group project.
+
+            </li>
+            <li class="list-group-item">
+                The points you invest in the group project will be doubled and equally distributed among the 6 members
+                of your group, excluding you.
+
+            </li>
+            <li class="list-group-item">
+                Similarly, the amount of points invested in the group project by each other group member, for example
+                participant A, will be doubled and distributed equally between you and the other 6 members of your
+                group, excluding subject A.
+            </li>
+
+            <h5 class="my-3 text-center"> How payoffs are determined </h5>
+            <li class="list-group-item">
+
+                The payoffs you earn in the Part 2 will be equal to:
+
+
+                <div class="text-center my-3"><code>
+
+                    100 points <strong>minus</strong> the amount of points you decide to invest in the group project
+                    <strong>plus</strong> plus the amount of points invested in the project by the other members of your
+                    group . <strong>multiplied</strong> by 2 and
+                    <strong>divided</strong> by 4.
+
+
+                </code>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <h5 class="my-3"> Example 1 </h5>
+
+                Suppose that a participant has decided to invest half of the total amount of points in the
+                group project, i.e. 50 points. Suppose further that the other members of his group have invested a total
+                of 300 points in the group project. The payoff for this participant will  be:
+
+
+                <div class="text-center">
+                    <code>100 - 50 + (300 * 2 / 6) = 150</code>
+                </div>
+
+            </li>
+            <li class="list-group-item">
+                <h5 class="my-3">Example 2</h5>
+
+                Suppose that a participant has decided not to invest any of the total amount of points for the period in
+                the group project, i.e. 0 points. Suppose further that the other members of his group invested a total
+                of 300 points in the project. The payoff for this participant will  be:
+
+
+                <div class="text-center">
+                    <code>100 - 0 + (300 * 2 / 6) = 200</code>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</div>

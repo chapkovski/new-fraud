@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree i18n %}
+
+{% block title %}
+    The second part
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    The first part of the experiment is over.
+                </li>
+                <li class="list-group-item">
+                    Now the second part will begin.
+                </li>
+                <li class="list-group-item">
+                    In the second part, both you
+                    and the other 6 members of your group, with whom you interacted in the first part of the experiment,
+                    will receive an amount of points equal to 100.
+                </li>
+                <li class="list-group-item">
+
+                    In each period both you and the other members of your group will have to choose how many of these
+                    100 points to keep and how many to invest in a common project.
+                </li>
+                <li class="list-group-item">
+                    The points you invest in the project will be doubled and will then be equally distributed among the
+                    6 members of your group, excluding you.
+                </li>
+                <li class="list-group-item">
+                    Similarly, the amount of points invested by each member of your group, for example by subject A,
+                    will be doubled and then distributed equally between you and the other 6 members of your group,
+                    excluding subject A.
+                </li>
+        </div>
+    </div>
+    <div class="my-3">
+        {% next_button %}
+    </div>
+
+
+{% endblock %}

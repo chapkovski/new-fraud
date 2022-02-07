@@ -2,6 +2,12 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
+        name='ggeg_only',
+        display_name="GGEG Only",
+        num_demo_participants=3,
+        app_sequence=['ggeg'],
+    ),
+    dict(
         name='baseline_voter',
         display_name="Baseline: VOTER",
         num_demo_participants=3,
@@ -84,4 +90,4 @@ DEMO_PAGE_INTRO_HTML = """ """
 SECRET_KEY = 'ft=z+gl(x&t0-1%jo4!lmkk@vac_u78+-0lnbngwujz@#aaq^l'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
-INSTALLED_APPS = ['otree']
+INSTALLED_APPS = ['otree', 'django.contrib.humanize', ]
