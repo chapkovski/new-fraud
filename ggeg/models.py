@@ -52,6 +52,6 @@ class Player(BasePlayer):
                                     widget=widgets.RadioSelectHorizontal
                                     )
     cq_ggeg_3 = models.IntegerField(label="What will be subject A’s final earnings for Part 2?",
-                                    choices=(0, 50, 100, 200, 300),
+                                    choices=(0, 50, 100, 150, 300),
                                     widget=widgets.RadioSelectHorizontal
                                     )
