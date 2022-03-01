@@ -18,11 +18,11 @@
         </tr>
         <tr>
             <td>{% trans 'Others contributed to the project:' %}</td>
-            <td>{{ others }}</td>
+            <td>{{ others|c }}</td>
         </tr>
         <tr>
             <td>{% trans "Your share of others' contribution:" %}</td>
-            <td>{{ player.others_contributions }}</td>
+            <td>{{ your_share_of_others|c }}</td>
         </tr>
 
         <tr class="table-primary">

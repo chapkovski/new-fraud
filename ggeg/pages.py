@@ -2,7 +2,7 @@ from otree.api import Currency as c, currency_range
 from ._builtin import WaitPage
 from fraud.pages import Page
 from .models import Constants, Player
-
+import json
 
 class SecondPartIntro(Page):
     pass
@@ -27,18 +27,14 @@ class Contribution(Page):
 
     def before_next_page(self):
         self.player.set_to_others()
-
-
-
-class BeforeResultsWP(WaitPage):
-    def after_all_players_arrive(self):
-        for p in self.group.get_players():
-            p.set_payoff()
+        self.player.set_payoffs()
 
 
 class Results(Page):
     def vars_for_template(self) -> dict:
-        return {'others': sum([p.contribution for p in self.player.get_others_in_group()])}
+
+        return {'others': sum(json.loads(self.player.others_contributions)),
+                'your_share_of_others':round(sum(json.loads(self.player.others_contributions))/Constants.num_others)}
 
 
 page_sequence = [
@@ -46,6 +42,6 @@ page_sequence = [
     AnnouncingSecondPart,
     ComprehensionQ,
     Contribution,
-    BeforeResultsWP,
+
     Results
 ]

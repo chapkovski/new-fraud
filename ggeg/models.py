@@ -2,7 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-
+import json, random
 author = 'Luca Corazzini, Philipp Chapkovski, Valeria Maggian'
 
 doc = """
@@ -12,9 +12,10 @@ Generalized Gift Exchange Game
 
 class Constants(BaseConstants):
     name_in_url = 'ggeg'
-    players_per_group = 3
+    players_per_group = None
+    num_pseudo_players = 7
     num_rounds = 1
-    num_others = players_per_group - 1
+    num_others = num_pseudo_players - 1
     coef = 2
     endowment = 100
 
@@ -23,6 +24,8 @@ class Subsession(BaseSubsession):
     def creating_session(self):
         for p in self.get_players():
             p.endowment = Constants.endowment
+            othercontrib =  random.choices(range(Constants.endowment),k=Constants.num_others)
+            p.others_contributions = json.dumps(othercontrib)
 
 
 class Group(BaseGroup):
@@ -35,13 +38,13 @@ class Player(BasePlayer):
     contribution = models.CurrencyField(min=0, max=Constants.endowment)
     others_contributions = models.CurrencyField()
     to_others = models.CurrencyField()
-
+    others_contributions = models.StringField()
     def set_to_others(self):
-        self.to_others = self.contribution * Constants.coef / (Constants.players_per_group - 1)
+        self.to_others = self.contribution * Constants.coef / (Constants.num_others)
 
-    def set_payoff(self):
-        self.others_contributions = sum([p.to_others for p in self.get_others_in_group()])
-        self.intermediary_payoff = self.endowment - self.contribution + self.others_contributions
+    def set_payoffs(self):
+        others_contributions = sum(json.loads(self.others_contributions))
+        self.intermediary_payoff = self.endowment - self.contribution + round(others_contributions/Constants.num_others)
 
     cq_ggeg_1 = models.IntegerField(label="What will be group member A’s final earnings for Part 2?",
                                     choices=(0, 100, 150, 200, 300),
