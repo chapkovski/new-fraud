@@ -75,33 +75,52 @@ class Vote(Page):
     def is_displayed(self):
         return self.player.role() == 'voter'
 
-    def before_next_page(self):
-        # TODO: for debugging only
-        self.player.set_payoffs()
+
+class BeforeFrWP(WaitPage):
+    pass
 
 
 class Fraud(Page):
-    form_model = 'player'
-    form_fields = ['fraud']
+    form_model = 'group'
+
+    def get_form_fields(self):
+        if self.player.party == Constants.alpha_party:
+            return ['fraud_A']
+        else:
+            return ['fraud_B']
 
     def is_displayed(self):
         return self.player.role() == 'candidate' and self.session.config.get('fraud')
 
-    def before_next_page(self):
-        # TODO: for debugging only
-        self.player.set_payoffs()
+
+class BeforeInfoWP(WaitPage):
+    def after_all_players_arrive(self):
+        self.group.set_winner_party()
 
 
 class Info(Page):
     form_model = 'player'
     form_fields = ['info']
 
+    def before_next_page(self):
+        if self.player.party == Constants.alpha_party:
+            self.group.candidate_A_msg = Constants.candidate_A_msgs[self.player.info]
+        if self.player.party == Constants.beta_party:
+            self.group.candidate_B_msg = Constants.candidate_B_msgs[self.player.info]
+
     def is_displayed(self):
         return self.player.role() == 'candidate' and self.session.config.get('info')
 
 
+class BeforeResultsWP(WaitPage):
+    def after_all_players_arrive(self):
+        self.group.set_payoffs()
+
+
 class Results(Page):
-    pass
+    def app_after_this_page(self, upcoming_apps):
+        if self.round_number == Constants.num_rounds and self.player.role() =='candidate':
+            return 'last'
 
 
 page_sequence = [
@@ -113,9 +132,9 @@ page_sequence = [
     Examples,
     QuizAnnouncement,
     Quiz,
-    Vote,
     Fraud,
     Info,
+    Vote,
     Results,
 
 ]

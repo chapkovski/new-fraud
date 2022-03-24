@@ -1,66 +1,40 @@
 from os import environ
 
+app_sequence = [
+    'fraud',
+    'ggeg',
+    'last'
+]
 SESSION_CONFIGS = [
+
     dict(
-        name='ggeg_only',
-        display_name="GGEG Only",
-        num_demo_participants=3,
-        app_sequence=['ggeg'],
-    ),
-    dict(
-        name='baseline_voter',
-        display_name="Baseline: VOTER",
-        num_demo_participants=3,
-        app_sequence=['fraud', 'ggeg'],
+        name='baseline',
+        display_name=" baseline",
+        num_demo_participants=11,
+        app_sequence=app_sequence,
         fraud=False,
         info=False,
-        role='voter'
+
     ),
     dict(
-        name='baseline_candidate',
-        display_name="Baseline: CANDIDATE",
-        num_demo_participants=3,
-        app_sequence=['fraud', 'ggeg'],
-        fraud=False,
-        info=False,
-        role='candidate'
-    ),
-    dict(
-        name='fraud_voter',
-        display_name="Fraud: VOTER",
-        num_demo_participants=3,
-        app_sequence=['fraud', 'ggeg'],
+        name='fraud',
+        display_name="Fraud",
+        num_demo_participants=11,
+        app_sequence=app_sequence,
         fraud=True,
         info=False,
         role='voter'
 
     ),
     dict(
-        name='fraud_candidate',
-        display_name="Fraud: CANDIDATE",
-        num_demo_participants=3,
-        app_sequence=['fraud', 'ggeg'],
-        fraud=True,
-        info=False,
-        role='candidate'
-    ),
-    dict(
-        name='fraudinfo_voter',
-        display_name="Fraud + Communication: VOTER",
-        num_demo_participants=3,
-        app_sequence=['fraud', 'ggeg'],
+        name='fraud_info',
+        display_name="Fraud + Communication",
+        num_demo_participants=11,
+        app_sequence=app_sequence,
         fraud=True,
         info=True,
         role='voter'
-    ),
-    dict(
-        name='fraudinfo_candidate',
-        display_name="Fraud + Communication: CANDIDATE",
-        num_demo_participants=4,
-        app_sequence=['fraud', 'ggeg'],
-        fraud=True,
-        info=True,
-        role='candidate'
+
     ),
 ]
 

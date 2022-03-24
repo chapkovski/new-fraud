@@ -22,7 +22,13 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 5
     endowment = 10
-    parties = ['ALPHA', 'BETA']
+    alpha_party = 'ALPHA'
+    beta_party = 'BETA'
+    parties = [alpha_party, beta_party]
+    num_alpha = 4
+    num_beta = 5
+    voters = [alpha_party * num_alpha] + [beta_party * num_beta]
+    candidate_ids = [10, 11]
     fraud_cost = 40
     lby = 0
     uby = 55
@@ -56,37 +62,36 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     treatment = models.StringField()
-    # NB! TODO THAT IS FOR DEBUGGING ONLY - MOVE TO GROUPS!!!
-    other_fraud_committed = models.BooleanField()
-    party_win = models.StringField()
-    voters_informed = models.BooleanField()
-    candidate_A_msg = models.StringField()
-    candidate_B_msg = models.StringField()
 
-    # END OF THAT IS FOR DEBUGGING ONLY - MOVE TO GROUPS!!!
     def creating_session(self):
-        self.candidate_A_msg = random.choice(Constants.candidate_A_msgs)
-        self.candidate_B_msg = random.choice(Constants.candidate_B_msgs)
+
+        for p in self.get_players():
+            if p.id_in_group in Constants.candidate_ids:
+                p.inner_role = 'candidate'
+                p.participant.vars['role'] = 'candidate'
+            else:
+                p.inner_role = 'voter'
+                p.participant.vars['role'] = 'voter'
+
         if self.session.config.get('fraud') and self.session.config.get('info'):
             self.treatment = 'fraud_info'
         elif self.session.config.get('fraud') and not self.session.config.get('info'):
             self.treatment = 'fraud_only'
         else:
             self.treatment = 'baseline'
-        # TODO: the following for debugging only.
-        if self.round_number == 1 and self.session.config.get('role') == 'candidate':
-            for p in self.session.get_participants():
-                p.vars['party'] = random.choice(Constants.parties)
-        self.party_win = random.choice(Constants.parties)
-        if self.session.config.get('role') == 'voter':
 
-            self.voters_informed = random.choice([True, False])
-            for p in self.get_players():
+        if self.round_number == 1:
+            for g in self.get_groups():
+                for i, p in enumerate(g.candidates):
+                    p.participant.vars['party'] = Constants.parties[i]
+        for g in self.get_groups():
+            voters = Constants.voters.copy()
+            random.shuffle(voters)
+            for i, p in enumerate(g.voters):
                 p.y = random.randint(Constants.lby, Constants.uby)
-                p.party = random.choice(Constants.parties)
-        if self.session.config.get('role') == 'candidate':
-            self.other_fraud_committed = random.choice([True, False])
-            for p in self.get_players():
+                p.party = voters[i]
+
+            for p in g.candidates:
                 p.party = p.participant.vars.get('party')
 
     def get_conversion_rate(self):
@@ -95,30 +100,44 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    pass
+    fraud_A = models.BooleanField(initial=False)
+    fraud_B = models.BooleanField(initial=False)
+
+
+    party_win = models.StringField()
+    voters_informed = models.BooleanField()
+    candidate_A_msg = models.StringField()
+    candidate_B_msg = models.StringField()
+
+    @property
+    def candidates(self):
+        return self.player_set.filter(inner_role='candidate')
+
+    @property
+    def voters(self):
+        return self.player_set.filter(inner_role='voter')
+
+    def set_winner_party(self):
+        voters = self.player_set.filter(inner_role='voter')
+        alpha_votes = voters.filter(party=Constants.alpha_party).count()
+        beta_votes = voters.filter(party=Constants.beta_party).count()
+        alpha_votes += self.fraud_A
+        beta_votes += self.fraud_B
+        if alpha_votes > beta_votes:
+            self.party_win = Constants.alpha_party
+
+        elif alpha_votes < beta_votes:
+            self.party_win = Constants.beta_party
+        else:
+            self.party_win = random.choice(Constants.parties)
+
+    def set_payoffs(self):
+        for p in self.get_players():
+            p.set_payoff()
 
 
 class Player(BasePlayer):
-    def set_payoffs(self):
-        # todo; for debugging only
-        if self.role() == 'voter':
-            payoff = self.y
-            if self.subsession.party_win == self.party:
-                payoff += Constants.payoffs['voter']['win']
-            else:
-                payoff += Constants.payoffs['voter']['loss']
-            payoff -= (self.y) * self.vote
-        else:
-            if self.subsession.party_win == self.party:
-                payoff = Constants.payoffs['candidate']['win']
-            else:
-                payoff = Constants.payoffs['candidate']['loss']
-            payoff -= (Constants.fraud_cost) * self.fraud
-        self.payoff = payoff
-
-    def role(self):
-        return self.session.config.get('role')
-
+    inner_role = models.StringField()
     y = models.IntegerField()
     party = models.StringField()
     vote = models.BooleanField(
@@ -134,8 +153,34 @@ class Player(BasePlayer):
         label='Please, choose the message you would like to send to the voters:',
         widget=widgets.RadioSelect)
 
+    @property
+    def other_fraud_committed(self):
+        if self.party == Constants.alpha_party:
+            return self.group.fraud_B
+        else:
+            return self.group.fraud_A
+
+    def role(self):
+        return self.inner_role
+
+    def set_payoffs(self):
+        if self.role() == 'voter':
+            payoff = self.y
+            if self.group.party_win == self.party:
+                payoff += Constants.payoffs['voter']['win']
+            else:
+                payoff += Constants.payoffs['voter']['loss']
+            payoff -= (self.y) * self.vote
+        else:
+            if self.group.party_win == self.party:
+                payoff = Constants.payoffs['candidate']['win']
+            else:
+                payoff = Constants.payoffs['candidate']['loss']
+            payoff -= (Constants.fraud_cost) * self.fraud
+        self.payoff = payoff
+
     def get_candidate_name(self):
-        if self.party == 'ALPHA': return 'AB'
+        if self.party == 'ALPHA': return 'A'
         return 'B'
 
     def get_other_candidate_name(self):
@@ -143,7 +188,7 @@ class Player(BasePlayer):
         return 'A'
 
     def get_other_candidate_decision(self):
-        return Constants.fraud_correspondence[self.subsession.other_fraud_committed]
+        return Constants.fraud_correspondence[self.other_fraud_committed]
 
     def info_choices(self):
         choices = [
@@ -189,18 +234,21 @@ Totally, three members of the BETA party and four members of the ALPHA party cho
 
     # END OF BASELINE ONLYE
     # FRAUD OR FRAUD+INFO ONLY
-    cq_8 = models.IntegerField(label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decide not to implement electoral fraud. A member of the BETA party is randomly assigned a Y bonus equal to 21 points and decides to abstain. In Total, three members of the BETA party and four members of the ALPHA party chose to vote. How many points does the above described member of the BETA party earn in this round?""",
-                               choices=[5, 21, 26, 55, 76, 105],
-                               widget=widgets.RadioSelect
-                               )
-    cq_9 = models.IntegerField(label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decide not to implement electoral fraud. In Total, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A earn in this round?""",
-                               choices=[5, 60, 70, 110, 170, 210],
-                               widget=widgets.RadioSelect
-                               )
-    cq_10 = models.IntegerField(label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 20 points. Candidate A decides to implement electoral fraud while Candidate B does not. In Total, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A earn in this round?""",
-                                choices=[5, 60, 70, 110, 190, 210],
-                                widget=widgets.RadioSelect
-                                )
+    cq_8 = models.IntegerField(
+        label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decide not to implement electoral fraud. A member of the BETA party is randomly assigned a Y bonus equal to 21 points and decides to abstain. In Total, three members of the BETA party and four members of the ALPHA party chose to vote. How many points does the above described member of the BETA party earn in this round?""",
+        choices=[5, 21, 26, 55, 76, 105],
+        widget=widgets.RadioSelect
+    )
+    cq_9 = models.IntegerField(
+        label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decide not to implement electoral fraud. In Total, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A earn in this round?""",
+        choices=[5, 60, 70, 110, 170, 210],
+        widget=widgets.RadioSelect
+    )
+    cq_10 = models.IntegerField(
+        label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 20 points. Candidate A decides to implement electoral fraud while Candidate B does not. In Total, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A earn in this round?""",
+        choices=[5, 60, 70, 110, 190, 210],
+        widget=widgets.RadioSelect
+    )
     cq_11 = models.IntegerField(label="""How many points does Candidate B earn in this round?""",
                                 choices=[5, 60, 70, 110, 170, 210],
                                 widget=widgets.RadioSelect
