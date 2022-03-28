@@ -27,7 +27,7 @@ class Constants(BaseConstants):
     parties = [alpha_party, beta_party]
     num_alpha = 4
     num_beta = 5
-    voters = [alpha_party * num_alpha] + [beta_party * num_beta]
+    voters = [alpha_party] * num_alpha + [beta_party] * num_beta
     candidate_ids = [10, 11]
     fraud_cost = 40
     lby = 0
@@ -72,6 +72,7 @@ class Subsession(BaseSubsession):
             else:
                 p.inner_role = 'voter'
                 p.participant.vars['role'] = 'voter'
+            p.save()
 
         if self.session.config.get('fraud') and self.session.config.get('info'):
             self.treatment = 'fraud_info'
@@ -85,10 +86,13 @@ class Subsession(BaseSubsession):
                 for i, p in enumerate(g.candidates):
                     p.participant.vars['party'] = Constants.parties[i]
         for g in self.get_groups():
+
             voters = Constants.voters.copy()
             random.shuffle(voters)
             for i, p in enumerate(g.voters):
                 p.y = random.randint(Constants.lby, Constants.uby)
+
+
                 p.party = voters[i]
 
             for p in g.candidates:
