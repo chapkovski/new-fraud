@@ -81,8 +81,8 @@ class BeforeFrWP(WaitPage):
 
 
 class Fraud(Page):
-    instructions = True
     form_model = 'group'
+    instructions =  True
 
     def get_form_fields(self):
         if self.player.party == Constants.alpha_party:
