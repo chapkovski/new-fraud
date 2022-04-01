@@ -68,6 +68,10 @@ class Quiz(FirstPage):
         return base
 
 
+class RoleAnnouncement(Page):
+    instructions = True
+
+
 class Vote(Page):
     form_model = 'player'
     form_fields = ['vote']
@@ -82,7 +86,7 @@ class BeforeFrWP(WaitPage):
 
 class Fraud(Page):
     form_model = 'group'
-    instructions =  True
+    instructions = True
 
     def get_form_fields(self):
         if self.player.party == Constants.alpha_party:
@@ -121,8 +125,9 @@ class BeforeResultsWP(WaitPage):
 
 class Results(Page):
     instructions = True
+
     def app_after_this_page(self, upcoming_apps):
-        if self.round_number == Constants.num_rounds and self.player.role() =='candidate':
+        if self.round_number == Constants.num_rounds and self.player.role() == 'candidate':
             return 'last'
 
 
@@ -135,6 +140,7 @@ page_sequence = [
     Examples,
     QuizAnnouncement,
     Quiz,
+    RoleAnnouncement,
     Fraud,
     BeforeInfoWP,
     Info,

@@ -6,7 +6,7 @@ import random
 
 class PlayerBot(Bot):
     def play_round(self):
-
+        yield  pages.RoleAnnouncement
         if self.player.role()=='voter':
             yield pages.Vote, dict(vote=random.choice([True, False]))
         if self.player.role() == 'candidate':

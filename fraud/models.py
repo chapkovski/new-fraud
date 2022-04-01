@@ -29,6 +29,7 @@ class Constants(BaseConstants):
     num_beta = 5
     voters = [alpha_party] * num_alpha + [beta_party] * num_beta
     candidate_ids = [10, 11]
+    fraud_costs = [20, 40]
     fraud_cost = 40
     lby = 0
     uby = 55
@@ -86,12 +87,11 @@ class Subsession(BaseSubsession):
                 for i, p in enumerate(g.candidates):
                     p.participant.vars['party'] = Constants.parties[i]
         for g in self.get_groups():
-
+            g.fraud_cost = random.choice(Constants.fraud_costs)
             voters = Constants.voters.copy()
             random.shuffle(voters)
             for i, p in enumerate(g.voters):
                 p.y = random.randint(Constants.lby, Constants.uby)
-
 
                 p.party = voters[i]
 
@@ -104,6 +104,7 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
+    fraud_cost = models.IntegerField()
     fraud_A = models.BooleanField(
         label='Please, make your decision for this round:',
         choices=[
@@ -116,7 +117,6 @@ class Group(BaseGroup):
             (False, 'Not implement the electoral fraud'),
             (True, 'Implement the electoral fraud')
         ], widget=widgets.RadioSelectHorizontal)
-
 
     party_win = models.StringField()
     voters_informed = models.BooleanField()
@@ -135,8 +135,9 @@ class Group(BaseGroup):
         voters = self.player_set.filter(inner_role='voter')
         alpha_votes = voters.filter(party=Constants.alpha_party).count()
         beta_votes = voters.filter(party=Constants.beta_party).count()
-        alpha_votes += self.fraud_A
-        beta_votes += self.fraud_B
+        if self.session.config.get('fraud'):
+            alpha_votes += self.fraud_A
+            beta_votes += self.fraud_B
         if alpha_votes > beta_votes:
             self.party_win = Constants.alpha_party
 
@@ -173,6 +174,7 @@ class Player(BasePlayer):
             return self.group.fraud_A
         else:
             return self.group.fraud_B
+
     @property
     def other_fraud_committed(self):
         if self.party == Constants.alpha_party:
@@ -196,7 +198,8 @@ class Player(BasePlayer):
                 payoff = Constants.payoffs['candidate']['win']
             else:
                 payoff = Constants.payoffs['candidate']['loss']
-            payoff -= (Constants.fraud_cost) * self.fraud
+            if self.session.config.get('fraud'):
+                payoff -= (self.group.fraud_cost) * self.fraud
         self.payoff = payoff
 
     def get_candidate_name(self):

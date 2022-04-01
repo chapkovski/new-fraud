@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Round {{ view.round_number }} out of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+    {% if player.role == 'candidate' %}
+        {% include 'fraud/includes/candidate_block.html' %}
+    {% else %}
+        {% include 'fraud/includes/voter_block.html' %}
+    {% endif %}
+
+    {% include 'fraud/includes/party_block.html' %}
+    {% if session.config.fraud %}
+        {% include 'fraud/includes/fraud_cost.html' %}
+
+    {% endif %}
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}
