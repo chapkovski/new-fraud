@@ -104,8 +104,18 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    fraud_A = models.BooleanField(initial=False)
-    fraud_B = models.BooleanField(initial=False)
+    fraud_A = models.BooleanField(
+        label='Please, make your decision for this round:',
+        choices=[
+            (False, 'Not implement the electoral fraud'),
+            (True, 'Implement the electoral fraud')
+        ], widget=widgets.RadioSelectHorizontal)
+    fraud_B = models.BooleanField(
+        label='Please, make your decision for this round:',
+        choices=[
+            (False, 'Not implement the electoral fraud'),
+            (True, 'Implement the electoral fraud')
+        ], widget=widgets.RadioSelectHorizontal)
 
 
     party_win = models.StringField()

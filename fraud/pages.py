@@ -81,6 +81,7 @@ class BeforeFrWP(WaitPage):
 
 
 class Fraud(Page):
+    instructions = True
     form_model = 'group'
 
     def get_form_fields(self):
@@ -99,6 +100,7 @@ class BeforeInfoWP(WaitPage):
 
 
 class Info(Page):
+    instructions = True
     form_model = 'player'
     form_fields = ['info']
 
@@ -118,20 +120,21 @@ class BeforeResultsWP(WaitPage):
 
 
 class Results(Page):
+    instructions = True
     def app_after_this_page(self, upcoming_apps):
         if self.round_number == Constants.num_rounds and self.player.role() =='candidate':
             return 'last'
 
 
 page_sequence = [
-    # Introduction,
-    # Instructions,
-    # EarningsIntro,
-    # EarningsMembersExplained,
-    # EarningsCandidatesExplained,
-    # Examples,
-    # QuizAnnouncement,
-    # Quiz,
+    Introduction,
+    Instructions,
+    EarningsIntro,
+    EarningsMembersExplained,
+    EarningsCandidatesExplained,
+    Examples,
+    QuizAnnouncement,
+    Quiz,
     Fraud,
     BeforeInfoWP,
     Info,
