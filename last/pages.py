@@ -16,5 +16,6 @@ class Results(Page):
 
 
 page_sequence = [
+    MyPage
     # MyPage, ResultsWaitPage, Results
 ]

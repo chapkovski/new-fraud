@@ -193,6 +193,8 @@ class Player(BasePlayer):
             else:
                 payoff += Constants.payoffs['voter']['loss']
             payoff -= (self.y) * self.vote
+            # print(f'y:{self.y}, current payoff:{payoff}, vote:{self.vote}, diff to payoff: {self.y*self.vote}, party won::{self.group.party_win == self.party}')
+            # print('-'*100)
         else:
             if self.group.party_win == self.party:
                 payoff = Constants.payoffs['candidate']['win']

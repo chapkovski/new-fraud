@@ -8,16 +8,16 @@ import random
 class PlayerBot(Bot):
 
     def play_round(self):
+        if self.participant.vars.get('role')=='voter':
+            yield SecondPartIntro,
 
-        yield SecondPartIntro,
+            yield AnnouncingSecondPart,
+            yield ComprehensionQ, {
+                        'cq_ggeg_1': 0,
+                        'cq_ggeg_2': 150,
+                        'cq_ggeg_3': 300,
+                    },
 
-        yield AnnouncingSecondPart,
-        yield ComprehensionQ, {
-                    'cq_ggeg_1': 0,
-                    'cq_ggeg_2': 150,
-                    'cq_ggeg_3': 300,
-                },
-
-        yield Contribution, {'contribution': random.randint(0, self.player.endowment)}
-        yield Results
+            yield Contribution, {'contribution': random.randint(0, self.player.endowment)}
+            yield Results
 

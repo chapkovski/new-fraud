@@ -27,8 +27,9 @@ class Subsession(BaseSubsession):
             p.endowment = Constants.endowment
 
     def group_by_arrival_time_method(self, waiting_players):
-        if len(waiting_players) >= Constants.num_real_players:
-            return waiting_players[:Constants.num_real_players]
+        wps = [i for i in waiting_players if i.participant.vars.get('role')=='voter']
+        if len(wps) >= Constants.num_real_players:
+            return wps[:Constants.num_real_players]
 
 
 class Group(BaseGroup):
