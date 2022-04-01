@@ -158,6 +158,12 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect)
 
     @property
+    def fraud(self):
+        if self.party == Constants.alpha_party:
+            return self.group.fraud_A
+        else:
+            return self.group.fraud_B
+    @property
     def other_fraud_committed(self):
         if self.party == Constants.alpha_party:
             return self.group.fraud_B
@@ -167,7 +173,7 @@ class Player(BasePlayer):
     def role(self):
         return self.inner_role
 
-    def set_payoffs(self):
+    def set_payoff(self):
         if self.role() == 'voter':
             payoff = self.y
             if self.group.party_win == self.party:

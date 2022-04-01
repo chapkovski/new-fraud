@@ -137,6 +137,7 @@ page_sequence = [
     Info,
     BeforeFrWP,
     Vote,
+    BeforeResultsWP,
     Results,
 
 ]
