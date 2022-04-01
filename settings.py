@@ -38,7 +38,7 @@ SESSION_CONFIGS = [
     ),
 ]
 
-ROOMS = [{'name': 'frex_room', 'display_name': 'FREX room'}]
+ROOMS = [{'name': 'frex', 'display_name': 'FREX room'}]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
