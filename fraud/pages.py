@@ -124,16 +124,18 @@ class Results(Page):
 
 
 page_sequence = [
-    Introduction,
-    Instructions,
-    EarningsIntro,
-    EarningsMembersExplained,
-    EarningsCandidatesExplained,
-    Examples,
-    QuizAnnouncement,
-    Quiz,
+    # Introduction,
+    # Instructions,
+    # EarningsIntro,
+    # EarningsMembersExplained,
+    # EarningsCandidatesExplained,
+    # Examples,
+    # QuizAnnouncement,
+    # Quiz,
     Fraud,
+    BeforeInfoWP,
     Info,
+    BeforeFrWP,
     Vote,
     Results,
 
