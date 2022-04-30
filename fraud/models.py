@@ -89,7 +89,7 @@ class Subsession(BaseSubsession):
         for g in self.get_groups():
             g.fraud_cost = random.choice(Constants.fraud_costs)
             voters = Constants.voters.copy()
-            random.shuffle(voters)
+            # random.shuffle(voters)
             for i, p in enumerate(g.voters):
                 p.y = random.randint(Constants.lby, Constants.uby)
 

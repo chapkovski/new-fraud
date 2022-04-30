@@ -1,7 +1,7 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import Page as oTreePage, WaitPage
 from .models import Constants
-
+import json
 
 class Page(oTreePage):
     instructions = False
@@ -55,20 +55,27 @@ class QuizAnnouncement(FirstPage):
 class Quiz(FirstPage):
     instructions = True
     form_model = 'player'
+    def vars_for_template(self):
+        return dict(NEXT_BTN='Next',
+                    REQUIRED_MSG="Please, answer this question")
 
-    def get_form_fields(self):
-        base = [f'cq_{i}' for i in range(1, 6)]
-        if self.subsession.treatment == 'baseline':
-            toadd = [f'cq_{i}' for i in [6, 7]]
-            base.extend(toadd)
-        else:
-            toadd = [f'cq_{i}' for i in [8, 9, 10, 11]]
-            base.extend(toadd)
 
-        return base
+    def post(self):
+        survey_data = json.loads(self.request.POST.dict().get('surveyholder'))
 
+        for k, v in survey_data.items():
+            try:
+                setattr(self.player, k, int(v))
+            except AttributeError:
+                pass
+
+
+        return super().post()
 
 class RoleAnnouncement(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
     instructions = True
 
 
