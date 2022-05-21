@@ -61,7 +61,11 @@ class Quiz(FirstPage):
 
 
     def post(self):
-        survey_data = json.loads(self.request.POST.dict().get('surveyholder'))
+        try:
+            survey_data = json.loads(self.request.POST.dict().get('surveyholder'))
+        except Exception as e:
+            print(e)
+            return super().post()
 
         for k, v in survey_data.items():
             try:
@@ -140,11 +144,11 @@ class Results(Page):
 
 page_sequence = [
     Introduction,
-    Instructions,
-    EarningsIntro,
-    EarningsMembersExplained,
-    EarningsCandidatesExplained,
-    Examples,
+    # Instructions,
+    # EarningsIntro,
+    # EarningsMembersExplained,
+    # EarningsCandidatesExplained,
+    # Examples,
     QuizAnnouncement,
     Quiz,
     RoleAnnouncement,
