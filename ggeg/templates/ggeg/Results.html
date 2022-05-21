@@ -1,32 +1,43 @@
 {% extends "global/Page.html" %}
-{% load otree i18n %}
+{% load otree  %}
 
 {% block title %}
-    {% trans 'Results' %}
+   Risultati
 {% endblock %}
 
 {% block content %}
     <table class="table table-striped table-hover">
 
         <tr>
-            <td>{% trans 'Your endowment was:' %}</td>
+            <td>
+               Ammontare di punti che ti è stato assegnato:
+            </td>
             <td>{{ player.endowment }}</td>
         </tr>
         <tr>
-            <td>{% trans 'You contributed to the project:' %}</td>
+            <td>
+               Il tuo investimento nel  progetto comune:
+            </td>
             <td>{{ player.contribution }}</td>
         </tr>
         <tr>
-            <td>{% trans 'Others contributed to the project:' %}</td>
+            <td>
+               Altri hanno contribuito al progetto:
+            </td>
             <td>{{ others|c }}</td>
         </tr>
         <tr>
-            <td>{% trans "Your share of others' contribution:" %}</td>
+            <td>
+             La tua quota del contributo degli altri:
+            </td>
             <td>{{ player.others_contributions|c }}</td>
         </tr>
 
         <tr class="table-primary">
-            <td>{% trans 'Your payoff:' %}</td>
+            <td>
+
+                Il tuo payoff:
+            </td>
             <td>{{ player.intermediary_payoff }}</td>
         </tr>
     </table>

@@ -1,9 +1,12 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import WaitPage
-from fraud.pages import Page
+from fraud.pages import Page as FraudPage
 from .models import Constants, Player
 import json
 
+class Page(FraudPage):
+    def is_displayed(self):
+        return self.participant.vars.get('role') != 'candidate'
 
 class FirstWP(WaitPage):
     group_by_arrival_time = True
@@ -38,6 +41,9 @@ class Contribution(Page):
 
 
 class BeforeResultsWP(WaitPage):
+    def is_displayed(self):
+        return self.participant.vars.get('role') != 'candidate'
+
     def after_all_players_arrive(self):
         for p in self.group.get_players():
             p.set_payoff()
@@ -50,8 +56,8 @@ class Results(Page):
 
 page_sequence = [
     FirstWP,
-    SecondPartIntro,
-    AnnouncingSecondPart,
+    # SecondPartIntro,
+    # AnnouncingSecondPart,
     ComprehensionQ,
     Contribution,
     BeforeResultsWP,

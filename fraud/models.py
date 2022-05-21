@@ -20,7 +20,7 @@ Fraud expectations. Maggian, Baghdasaryan, Chapkovski
 class Constants(BaseConstants):
     name_in_url = 'fraud'
     players_per_group = None
-    num_rounds = 5
+    num_rounds = 1
     endowment = 10
     alpha_party = 'ALPHA'
     beta_party = 'BETA'
@@ -92,11 +92,23 @@ class Subsession(BaseSubsession):
             # random.shuffle(voters)
             for i, p in enumerate(g.voters):
                 p.y = random.randint(Constants.lby, Constants.uby)
-
                 p.party = voters[i]
 
             for p in g.candidates:
                 p.party = p.participant.vars.get('party')
+        for p in self.session.get_participants():
+            if p.vars['role'] == 'candidate':
+                p.vars['paying_app'] = 'fraud'
+                p.vars['paying_round'] = random.randint(1, Constants.num_rounds)
+                p.vars['round_to_show'] = p.vars['paying_round']
+            else:
+                p.vars['paying_app'] = random.choice(['fraud', 'ggeg'])
+                if p.vars['paying_app'] == 'fraud':
+                    p.vars['paying_round'] = random.randint(1, Constants.num_rounds)
+                    p.vars['round_to_show'] = p.vars['paying_round']
+                else:
+                    p.vars['paying_round'] = 1
+                    p.vars['round_to_show'] = Constants.num_rounds + 1
 
     def get_conversion_rate(self):
         hund_to_euro = self.session.config.get('real_world_currency_per_point') * 100
@@ -111,7 +123,7 @@ class Group(BaseGroup):
             (False, 'Nessun broglio elettorale: NON togliere un voto all’altro partito per aggiungerlo al tuo'),
             (True, 'Broglio elettorale: Togliere un voto all’altro partito per aggiungerlo al tuo')
         ], widget=widgets.RadioSelectHorizontal)
-    fraud_B =models.BooleanField(
+    fraud_B = models.BooleanField(
         label='Scegli se:',
         choices=[
             (False, 'Nessun broglio elettorale: NON togliere un voto all’altro partito per aggiungerlo al tuo'),
@@ -152,6 +164,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    intermediary_payoff = models.CurrencyField(initial=0)
     inner_role = models.StringField()
     y = models.IntegerField()
     party = models.StringField()
@@ -202,7 +215,7 @@ class Player(BasePlayer):
                 payoff = Constants.payoffs['candidate']['loss']
             if self.session.config.get('fraud'):
                 payoff -= (self.group.fraud_cost) * self.fraud
-        self.payoff = payoff
+        self.intermediary_payoff = payoff
 
     def get_candidate_name(self):
         if self.party == 'ALPHA': return 'A'

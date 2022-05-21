@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   Risultati finali
+{% endblock %}
+
+{% block content %}
+    <table class="table table-stripped table-hover my-3">
+    <tbody>
+    <tr>
+        <td>
+            Il periodo che è stato casualmente estratto per il pagamento è il numero:
+        </td>
+        <td>
+            {{ participant.vars.round_to_show }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+           I punti che hai ottenuto nel periodo estratto sono:
+        </td>
+        <td>
+            {{ player.payoff }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+          Il tuo guadagno finale in euro, comprensivo dei {{ session.config.participation_fee }} euro per esserti presentato in orario, è:
+        </td>
+        <td>
+            {{ participant.vars.round_to_show }}
+        </td>
+    </tr>
+    </tbody>
+    </table>
+
+{% endblock %}
+
+

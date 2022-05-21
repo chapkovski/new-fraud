@@ -1,16 +1,17 @@
 {% extends "global/Page.html" %}
-{% load otree i18n %}
+{% load otree %}
 
 {% block title %}
-    {% trans 'Comprehension questions for the second part' %}
+    Questionario
 {% endblock %}
 
 {% block content %}
     <div class="card my-3">
         <div class="card-body">
 
-            Suppose subject A invested the entire amount available to him  in the group project, i.e. 100
-            points. The other members of his group have not invested any points in the project.
+            Supponi che il soggetto X abbia investito l’intero ammontare a sua disposizione nel periodo nel progetto di
+            gruppo, cioè 100 punti.
+            Gli altri otto membri del suo gruppo non hanno investito alcun punto nel progetto
 
 
             {% formfield player.cq_ggeg_1 %}
@@ -19,8 +20,9 @@
     </div>
 
     <div class="card">
-        <div class="card-body"> Suppose subject A invested nothing in the project. Each of the other 6
-            members of his/her group invested their entire endowment (100 points).
+        <div class="card-body">
+            Supponi che il soggetto X non abbia investito nulla nel progetto di gruppo. Ciascun membro del suo gruppo ha
+            investito 100 punti nel progetto.
 
             {% formfield player.cq_ggeg_3 %}
         </div>
@@ -28,7 +30,7 @@
     <div class="my-3">
         {% next_button %}
     </div>
-    {% include 'ggeg/includes/ggeg_instruction_toggler.html' %}
+
 
 
 {% endblock %}

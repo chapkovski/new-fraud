@@ -19,7 +19,8 @@ class Constants(BaseConstants):
     num_others = num_real_players - 1
     coef = 2
     endowment = 100
-
+    INCORRECT_MSG = 'Controllare le istruzioni e provare a rispondere ancora una volta'
+    CQ_CHOICES=(0, 100, 125, 150, 300)
 
 class Subsession(BaseSubsession):
     def creating_session(self):
@@ -27,7 +28,7 @@ class Subsession(BaseSubsession):
             p.endowment = Constants.endowment
 
     def group_by_arrival_time_method(self, waiting_players):
-        wps = [i for i in waiting_players if i.participant.vars.get('role')=='voter']
+        wps = [i for i in waiting_players if i.participant.vars.get('role') == 'voter']
         if len(wps) >= Constants.num_real_players:
             return wps[:Constants.num_real_players]
 
@@ -50,15 +51,27 @@ class Player(BasePlayer):
         self.others_contributions = sum([p.to_others for p in self.get_others_in_group()])
         self.intermediary_payoff = self.endowment - self.contribution + self.others_contributions
 
-    cq_ggeg_1 = models.IntegerField(label="What will be group member A’s final earnings for Part 2?",
-                                    choices=(0, 100, 150, 200, 300),
+    cq_ggeg_1 = models.IntegerField(label="Quale sarà il suo guadagno per il periodo?",
+                                    choices=Constants.CQ_CHOICES,
                                     widget=widgets.RadioSelectHorizontal
                                     )
-    cq_ggeg_2 = models.IntegerField(label="What will be A’s in group members’ final earnings for Part 2?",
-                                    choices=(0, 100, 150, 200, 300),
+    cq_ggeg_2 = models.IntegerField(label="E il guadagno di un altro membro del suo gruppo?",
+                                    choices=Constants.CQ_CHOICES,
                                     widget=widgets.RadioSelectHorizontal
                                     )
-    cq_ggeg_3 = models.IntegerField(label="What will be subject A’s final earnings for Part 2?",
-                                    choices=(0, 50, 100, 150, 300),
+    cq_ggeg_3 = models.IntegerField(label="Quale sarà il suo guadagno per il periodo?",
+                                    choices=Constants.CQ_CHOICES,
                                     widget=widgets.RadioSelectHorizontal
                                     )
+
+    def cq_ggeg_1_error_message(self, value):
+        if value != 0:
+            return Constants.INCORRECT_MSG
+
+    def cq_ggeg_2_error_message(self, value):
+        if value != 125:
+            return Constants.INCORRECT_MSG
+
+    def cq_ggeg_3_error_message(self, value):
+        if value != 300:
+            return Constants.INCORRECT_MSG
