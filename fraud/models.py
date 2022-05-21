@@ -46,18 +46,18 @@ class Constants(BaseConstants):
         ),
     )
     fraud_correspondence = {
-        True: 'Commit a fraud in this round',
-        False: 'DO NOT commit a fraud in this round'
+        True: 'commettere broglio elettorale in questo round',
+        False: 'NON commettere broglio elettorale in questo round'
     }
     candidate_A_msgs = [
-        'Candidate B decided to implement electoral fraud so to subtract one vote from Party ALPHA',
-        'Candidate B decided to NOT to implement electoral fraud so to subtract one vote from Party ALPHA',
-        'Nothing to communicate'
+        'Il candidato B ha deciso di commettere broglio elettorale, cioè di togliere un voto al partito Alpha per aggiungerlo al partito Beta.',
+        'Il candidato B ha deciso di NON commettere broglio elettorale, cioè di togliere un voto al partito Alpha per aggiungerlo al partito Beta.',
+        'Niente da comunicare.'
     ]
     candidate_B_msgs = [
-        'Candidate A decided to implement electoral fraud so to subtract one vote from Party BETA',
-        'Candidate A decided to NOT to implement electoral fraud so to subtract one vote from Party BETA',
-        'Nothing to communicate'
+        'Il candidato A ha deciso di commettere broglio elettorale, cioè di togliere un voto al partito Beta per aggiungerlo al partito Alpha.',
+        'Il candidato A ha deciso di NON commettere broglio elettorale, cioè di togliere un voto al partito Beta per aggiungerlo al partito Alpha.',
+        'Niente da comunicare.'
     ]
 
 
@@ -106,16 +106,16 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     fraud_cost = models.IntegerField()
     fraud_A = models.BooleanField(
-        label='Please, make your decision for this round:',
+        label='Scegli se:',
         choices=[
-            (False, 'Not implement the electoral fraud'),
-            (True, 'Implement the electoral fraud')
+            (False, 'Nessun broglio elettorale: NON togliere un voto all’altro partito per aggiungerlo al tuo'),
+            (True, 'Broglio elettorale: Togliere un voto all’altro partito per aggiungerlo al tuo')
         ], widget=widgets.RadioSelectHorizontal)
-    fraud_B = models.BooleanField(
-        label='Please, make your decision for this round:',
+    fraud_B =models.BooleanField(
+        label='Scegli se:',
         choices=[
-            (False, 'Not implement the electoral fraud'),
-            (True, 'Implement the electoral fraud')
+            (False, 'Nessun broglio elettorale: NON togliere un voto all’altro partito per aggiungerlo al tuo'),
+            (True, 'Broglio elettorale: Togliere un voto all’altro partito per aggiungerlo al tuo')
         ], widget=widgets.RadioSelectHorizontal)
 
     party_win = models.StringField()
@@ -156,16 +156,16 @@ class Player(BasePlayer):
     y = models.IntegerField()
     party = models.StringField()
     vote = models.BooleanField(
-        label='Please make the decision, whether to vote or abstain in this round:',
-        choices=[(False, 'ABSTAIN'), (True, 'VOTE')], widget=widgets.RadioSelectHorizontal)
+        label='Scegli se:',
+        choices=[(False, 'Astenerti'), (True, 'Votare')], widget=widgets.RadioSelectHorizontal)
     fraud = models.BooleanField(
-        label='Please, make your decision for this round:',
+        label='Scegli se:',
         choices=[
-            (False, 'Not implement the electoral fraud'),
-            (True, 'Implement the electoral fraud')
+            (False, 'Nessun broglio elettorale: NON togliere un voto all’altro partito per aggiungerlo al tuo'),
+            (True, 'Broglio elettorale: Togliere un voto all’altro partito per aggiungerlo al tuo')
         ], widget=widgets.RadioSelectHorizontal)
     info = models.IntegerField(
-        label='Please, choose the message you would like to send to the voters:',
+        label='Quale messaggio vuoi inviare ai membri del partito Alpha e del partito Beta?',
         widget=widgets.RadioSelect)
 
     @property
@@ -208,6 +208,10 @@ class Player(BasePlayer):
         if self.party == 'ALPHA': return 'A'
         return 'B'
 
+    def get_other_party(self):
+        if self.party == 'ALPHA': return 'BETA'
+        return 'ALPHA'
+
     def get_other_candidate_name(self):
         if self.party == 'ALPHA': return 'B'
         return 'A'
@@ -218,65 +222,29 @@ class Player(BasePlayer):
     def info_choices(self):
         choices = [
             (0,
-             f'Candidate {self.get_other_candidate_name()} decided to implement electoral fraud so to subtract one vote from Party {self.party}'),
+             f'Il candidato {self.get_other_candidate_name()} ha deciso di commettere broglio elettorale, cioè di togliere un voto al partito {self.party} per aggiungerlo al partito {self.get_other_party()}'),
             (1,
-             f'Candidate {self.get_other_candidate_name()} decided NOT implement  electoral fraud so to subtract one vote from Party {self.party}'),
-            (2, 'Nothing to communicate')
+             f'Il candidato {self.get_other_candidate_name()} ha deciso di  NON commettere broglio elettorale, cioè di togliere un voto al partito {self.party} per aggiungerlo al partito {self.get_other_party()}'),
+            (2, 'Niente da comunicare.')
         ]
         return choices
 
     # cq_block
-    cq_1 = models.IntegerField(label='How many members are in the ALPHA party?',
-                               choices=[4, 5, 9],
-                               widget=widgets.RadioSelect)
-    cq_2 = models.IntegerField(label='How many members are in the BETA party?',
-                               choices=[4, 5, 9],
-                               widget=widgets.RadioSelect
-                               )
-    cq_3 = models.IntegerField(label='Is the role of member of party ALPHA or BETA randomly assigned in each round?',
-                               choices=[(1, 'Yes'), (0, 'No'), ],
-                               widget=widgets.RadioSelect
-                               )
-    cq_4 = models.IntegerField(label='Is the role of candidate A and B randomly assigned in each round?',
-                               choices=[(1, 'Yes'), (0, 'No'), ],
-                               widget=widgets.RadioSelect)
-    cq_5 = models.IntegerField(
-        label='Is the Y bonus of one party member necessarily the same as other members of the same party?',
-        choices=[(1, 'Yes'), (0, 'No'), ],
-        widget=widgets.RadioSelect)
+    cq_1 = models.IntegerField()
+    cq_2 = models.IntegerField()
+    cq_3 = models.IntegerField()
+    cq_4 = models.IntegerField()
 
     # BASELINE ONLYE
-    cq_6 = models.IntegerField(label="""Suppose the following situation: <br>  In round 3 a member of the BETA  party is randomly assigned a Y bonus equal to 21 points and decides to abstain.<br>
-Totally, three members of the BETA party and four members of the ALPHA party choose to vote. How many points does the above described member of the BETA party earn in this round?""",
-                               choices=[5, 21, 26, 55, 76, 105],
-                               widget=widgets.RadioSelect
-                               )
-    cq_7 = models.IntegerField(label="""Suppose the following situation: <br>  In round 3 a member of the BETA  party is randomly assigned a Y bonus equal to 21 points and decides to vote.<br>
-Totally, three members of the BETA party and four members of the ALPHA party choose to vote. How many points does the above described member of the BETA party earn in this round?""",
-                               choices=[5, 21, 26, 55, 76, 105],
-                               widget=widgets.RadioSelect
-                               )
-
+    cq_5 = models.IntegerField()
+    cq_6 = models.IntegerField()
+    cq_7 = models.IntegerField()
+    cq_8 = models.IntegerField()
     # END OF BASELINE ONLYE
     # FRAUD OR FRAUD+INFO ONLY
-    cq_8 = models.IntegerField(
-        label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decide not to implement electoral fraud. A member of the BETA party is randomly assigned a Y bonus equal to 21 points and decides to abstain. In Total, three members of the BETA party and four members of the ALPHA party chose to vote. How many points does the above described member of the BETA party earn in this round?""",
-        choices=[5, 21, 26, 55, 76, 105],
-        widget=widgets.RadioSelect
-    )
-    cq_9 = models.IntegerField(
-        label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 40 points. Both Candidate A and Candidate B decide not to implement electoral fraud. In Total, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A earn in this round?""",
-        choices=[5, 60, 70, 110, 170, 210],
-        widget=widgets.RadioSelect
-    )
-    cq_10 = models.IntegerField(
-        label="""Suppose the following situation: In a round the cost of electoral fraud is equal to 20 points. Candidate A decides to implement electoral fraud while Candidate B does not. In Total, four members of the Beta party and four members of the Alpha party decide to vote. How many points does Candidate A earn in this round?""",
-        choices=[5, 60, 70, 110, 190, 210],
-        widget=widgets.RadioSelect
-    )
-    cq_11 = models.IntegerField(label="""How many points does Candidate B earn in this round?""",
-                                choices=[5, 60, 70, 110, 170, 210],
-                                widget=widgets.RadioSelect
-                                )
+    cq_9 = models.IntegerField()
+    cq_10 = models.IntegerField()
+    cq_11 = models.IntegerField()
+    cq_12 = models.IntegerField()
 
     # END OF FRAUD ONLY

@@ -2,7 +2,7 @@
 {% load otree %}
 
 {% block title %}
-    Vote Decision. Round {{ view.round_number }} out of {{ Constants.num_rounds }}
+    Decisione di voto. Periodo  {{ view.round_number }} su {{ Constants.num_rounds }}
 {% endblock %}
 
 {% block content %}
@@ -11,12 +11,16 @@
             <div class="card-body">
                 <table class="table table-stripped table-hover">
                     <tr>
-                        <td>Message from Candidate&nbspA:</td>
+                        <td>
+                            Messaggio dal candidato A:
+                        </td>
                         <td><b>{{ group.candidate_A_msg }}</b></td>
                     </tr>
                     <tr>
-                        <td> Message from Candidate&nbsp
-                            B:</td>
+                        <td>
+                            Messaggio dal candidato B:
+
+                        </td>
                         <td><b>{{ group.candidate_B_msg }}</b></td>
                     </tr>
                 </table>
@@ -25,7 +29,7 @@
         </div>
     {% endif %}
     <div class="alert alert-warning text-center lead my-3">
-        Your Y bonus in this round is: <b><i>{{ player.y }} points</i></b>
+        In questo periodo, il tuo bonus Y è pari a:   <b><i>{{ player.y }} punti</i></b>
     </div>
     {% include 'fraud/includes/party_block.html' %}
     {% formfields %}
