@@ -143,7 +143,7 @@ class Results(Page):
 
 
 page_sequence = [
-    Introduction,
+    # Introduction,
     # Instructions,
     # EarningsIntro,
     # EarningsMembersExplained,
