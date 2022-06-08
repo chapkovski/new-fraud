@@ -36,6 +36,13 @@ SESSION_CONFIGS = [
         role='voter'
 
     ),
+    dict(
+        name='q',
+        display_name=" Questionnaire only",
+        num_demo_participants=1,
+        app_sequence=['last'],
+
+    ),
 ]
 
 ROOMS = [{'name': 'frex', 'display_name': 'FREX room'}]

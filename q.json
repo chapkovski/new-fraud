@@ -1,0 +1,106 @@
+{
+ "logoPosition": "right",
+ "pages": [
+  {
+   "name": "page1",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "WP13427",
+     "title": "74. Cosa preferisci: una lotteria con il 50% di possibilità di ricevere 150 Euro, e la stessa possibilità al 50% di non ricevere nulla, o una somma di 80 Euro come pagamento sicuro? ",
+     "choices": [
+      {
+       "value": "1",
+       "text": "opportunità del 50%"
+      },
+      {
+       "value": "2",
+       "text": "Pagamento sicuro"
+      }
+     ]
+    },
+    {
+     "type": "radiogroup",
+     "name": "WP13428",
+     "visibleIf": "{WP13427} = 2",
+     "title": "75. Preferisci la lotteria o una somma di 40 Euro come pagamento sicuro?",
+     "choices": [
+       {
+       "value": "1",
+       "text": "opportunità del 50%"
+      },
+      {
+       "value": "2",
+       "text": "Pagamento sicuro"
+      }
+     ]
+    },
+    {
+     "type": "radiogroup",
+     "name": "WP13429",
+     "visibleIf": "{WP13428} = 2",
+     "title": "75. Preferisci la lotteria o una somma di 20 Euro come pagamento sicuro?",
+     "choices": [
+      {
+       "value": "1",
+       "text": "opportunità del 50%"
+      },
+      {
+       "value": "2",
+       "text": "Pagamento sicuro"
+      }
+     ]
+    },
+    {
+     "type": "radiogroup",
+     "name": "WP13430",
+     "visibleIf": "{WP13429} = 2",
+     "title": "75. Preferisci la lotteria o una somma di 30 Euro come pagamento sicuro?",
+     "choices": [
+       {
+       "value": "1",
+       "text": "opportunità del 50%"
+      },
+      {
+       "value": "2",
+       "text": "Pagamento sicuro"
+      }
+     ]
+    },
+    {
+     "type": "radiogroup",
+     "name": "WP13431",
+     "visibleIf": "{WP13430} = 2",
+     "title": "75. Preferisci la lotteria o una somma di 35 Euro come pagamento sicuro?",
+     "choices": [
+      {
+       "value": "1",
+       "text": "opportunità del 50%"
+      },
+      {
+       "value": "2",
+       "text": "Pagamento sicuro"
+      }
+     ]
+    },
+    {
+     "type": "radiogroup",
+     "name": "WP13432",
+     "visibleIf": "{WP13431} = 2",
+     "title": "75. Preferisci la lotteria o una somma di 25 Euro come pagamento sicuro?",
+     "choices": [
+       {
+       "value": "1",
+       "text": "opportunità del 50%"
+      },
+      {
+       "value": "2",
+       "text": "Pagamento sicuro"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "questionsOnPageMode": "questionPerPage"
+}

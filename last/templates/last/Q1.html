@@ -1,0 +1,203 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Questionnairio
+{% endblock %}
+
+{% block content %}
+
+    <style>
+        label.btn.btn-default.btn-secondary.active {
+            background: yellow;
+            color: black;
+        }
+
+    </style>
+    <script src="{% static 'global/js/survey.jquery.min.js' %}"></script>
+    <script src="{% static 'global/js/showdown.min.js' %}"></script>
+
+    <div class="otree-body container">
+
+        <div id="surveyElement" style="display:inline-block;width:100%;"></div>
+    </div>
+    <input type="hidden" id="surveyholder" name="surveyholder">
+    <script>
+
+
+    Survey.defaultBootstrapCss.navigationButton = "btn-primary btn-lg";
+    Survey
+        .StylesManager
+        .applyTheme("bootstrap");
+
+
+    var surveyJSON = {
+  logoPosition: "right",
+  requiredText: "",
+  showPrevButton:false,
+          showCompletedPage: false,
+  completeText:'Successivo',
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        {
+          type: "text",
+          name: "anno_nascita",
+          title: "In che anno sei nato?",
+          isRequired: true,
+          inputType: "number",
+          min: 1900,
+          max: 2020
+        },
+        {
+          type: "radiogroup",
+          name: "gender",
+          title: "Sei:",
+          isRequired: true,
+          choices: ["donna", "uomo"]
+        },
+        {
+          type: "radiogroup",
+          name: "ambito_di_studio",
+          title:
+            "In quale ambito di studio ti stai specializzando/ti sei specializzato?",
+          isRequired: true,
+          choices: [
+            "Economia, Management ",
+            "Lettere, Lingue ",
+            "Scienze politiche",
+            "Matematica, Fisica, Ingengeria",
+            "Medicina",
+            "Altro"
+          ]
+        },
+        {
+          type: "checkbox",
+          name: "votare",
+          title: "Consideri andare a votare:",
+          choices: [
+            { value: "votare_diritto", text: "Un diritto" },
+            { value: "votare_dovere", text: "Un dovere" },
+            { value: "votare_inutile", text: "Inutile " },
+            { value: "votare_importante", text: "Importante " }
+          ]
+        },
+        {
+          type: "radiogroup",
+          name: "positive_reciprocity_a",
+          title:
+            "Per favore pensa a cosa faresti nella seguente situazione. Ti trovi in un’area che non ti è familiare, e ti accorgi di aver perso la strada. Chiedi indicazioni ad un estraneo. L’ estraneo ti offre di portarti alla tua destinazione. Aiutarti costa allo sconosciuto circa 16 Euro in totale. Tuttavia lo sconosciuto dice che non vuole del denaro da te. Hai con te 6 regali. Il regalo più economico costa 4 Euro, il più caro costa 24 Euro. Offriresti uno dei regali allo sconosciuto come dono di “ringraziamento”? Se si, Quale regalo daresti allo sconosciuto?",
+          isRequired: true,
+          choices: [
+            "No, non gli/le darei un regalo",
+            "Il regalo del valore di 4 Euro",
+            "Il regalo del valore di 8 Euro",
+            "Il regalo del valore di 12 Euro",
+            "Il regalo del valore di 16 Euro",
+            "Il regalo del valore di 20 Euro",
+            "Il regalo del valore di 24 Euro"
+          ]
+        }
+      ]
+    },
+    {
+      name: "page2",
+      elements: [
+        {
+          type: "html",
+          name: "question1",
+          html:
+            "Ora ti chiediamo di rispondere ad alcune domande riguardo la tua volontà di agire in un certo modo. Per favore, indica la tua risposta su una scala da 0 a 10. Uno 0 significa “per niente disposto a farlo” e un 10 significa “molto propenso a farlo” Potrai utilizzare anche un qualsiasi numero tra 0 e 10 per indicare dove si trova il tuo punteggio nella scala, utilizzando 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. "
+        },
+        {
+          type: "rating",
+          name: "negative_reciprocity_1",
+          title:
+            "Se vengo trattato molto ingiustamente, mi vendicherò alla prima occasione, anche se ci sarà un costo per farlo.",
+          isRequired: true,
+          rateMin: 0,
+          rateMax: 10
+        },
+        {
+          type: "rating",
+          name: "negative_reciprocity_2",
+          title:
+            "Quanto sei disposto a punire qualcuno che ti tratta in modo scorretto, anche se potrebbe costarti farlo? ",
+          isRequired: true,
+          rateMin: 0,
+          rateMax: 10
+        },
+        {
+          type: "rating",
+          name: "negative_reciprocity_3",
+          title:
+            "Quanto sei disposto a punire qualcuno che tratta ingiustamente gli altri, anche se potrebbe costarti farlo? ",
+          isRequired: true,
+          rateMin: 0,
+          rateMax: 10
+        },
+        {
+          type: "rating",
+          name: "positive_reciprocity_b",
+          title:
+            "Quando qualcuno mi fa un favore sono disposto a restituirglielo.",
+          isRequired: true,
+          rateMin: 0,
+          rateMax: 10
+        },
+        {
+          type: "rating",
+          name: "trust",
+          title: "Presumo che le persone abbiano solo le migliori intenzioni.",
+          isRequired: true,
+          rateMin: 0,
+          rateMax: 10
+        },
+        {
+          type: "rating",
+          name: "risk_taking",
+          title:
+            "Per favore, indica, quanto sei disposto/a o non disposto/a a correre dei rischi, utilizzando una scala da 0 a 10, dove 0 significa che sei “assolutamente non disposto/a a correre rischi” e 10 significa che sei “completamente disposto/a a correre rischi”. Potrai utilizzare anche un qualsiasi numero tra 0 e 10 per indicare dove si trova il tuo punteggio nella scala, utilizzando 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.",
+          isRequired: true,
+          rateMin: 0,
+          rateMax: 10
+        }
+      ]
+    }
+  ]
+};
+
+    window.survey = new Survey.Model(surveyJSON);
+
+    survey
+        .onComplete
+        .add(function (sender) {
+            document
+            $('#surveyholder').val(JSON.stringify(sender.data, null, 3))
+            $('#form').submit()
+            ;
+        });
+    //Create showdown markdown converter
+    var converter = new showdown.Converter();
+    survey
+        .onTextMarkdown
+        .add(function (survey, options) {
+            //convert the markdown text to html
+            var str = converter.makeHtml(options.text);
+            //remove root paragraphs <p></p>
+            str = str.substring(3);
+            str = str.substring(0, str.length - 4);
+            //set html
+            options.html = str;
+        });
+    survey.locale = 'it';
+    $("#surveyElement").Survey({model: survey});
+    ;
+
+
+
+
+    </script>
+
+{% endblock %}
