@@ -18,7 +18,15 @@
     <script src="{% static 'global/js/showdown.min.js' %}"></script>
 
     <div class="otree-body container">
-
+        <div class="card">
+            <div class="card-body">
+                <div class="card-text">
+                    Ti presenteremo qui di seguito 5 differenti ipotetiche situazioni in ognuna delle quali dovrai
+                    scegliere tra un pagamento sicuro di una determinata somma di denaro, o una lotteria, dove avresti
+                    la stessa probabilità di ottenere 150 Euro o nulla.
+                </div>
+            </div>
+        </div>
         <div id="surveyElement" style="display:inline-block;width:100%;"></div>
     </div>
     <input type="hidden" id="surveyholder" name="surveyholder">
@@ -413,6 +421,7 @@
     survey.locale = 'it';
     $("#surveyElement").Survey({model: survey});
     ;
+
 
 
 

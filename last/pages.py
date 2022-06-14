@@ -8,36 +8,39 @@ import json
 
 class Q1(Page):
     def post(self):
-        survey_data = json.loads(self.request.POST.get('surveyholder'))
-        votare = survey_data.pop('votare', [])
+        raw_data=self.request.POST.get('surveyholder')
+        if raw_data:
+            survey_data = json.loads(raw_data)
+            votare = survey_data.pop('votare', [])
 
-        for k, v in survey_data.items():
-            try:
-                setattr(self.player, k, int(v))
-            except ValueError:
-                setattr(self.player, k, v)
-            except AttributeError:
-                pass
+            for k, v in survey_data.items():
+                try:
+                    setattr(self.player, k, int(v))
+                except ValueError:
+                    setattr(self.player, k, v)
+                except AttributeError:
+                    pass
 
-        for i in votare:
-            try:
-                setattr(self.player, i, True)
-            except AttributeError:
-                pass
+            for i in votare:
+                try:
+                    setattr(self.player, i, True)
+                except AttributeError:
+                    pass
         return super().post()
 
 
 class Q2(Page):
     def post(self):
-        survey_data = json.loads(self.request.POST.get('surveyholder'))
-        pprint(survey_data)
-        for k, v in survey_data.items():
-            try:
-                setattr(self.player, k, int(v))
-            except ValueError:
-                setattr(self.player, k, v)
-            except AttributeError:
-                pass
+        raw_data = self.request.POST.get('surveyholder')
+        if raw_data:
+            survey_data = json.loads(raw_data)
+            for k, v in survey_data.items():
+                try:
+                    setattr(self.player, k, int(v))
+                except ValueError:
+                    setattr(self.player, k, v)
+                except AttributeError:
+                    pass
         return super().post()
 
 
