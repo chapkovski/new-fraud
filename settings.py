@@ -23,7 +23,7 @@ SESSION_CONFIGS = [
         app_sequence=app_sequence,
         fraud=True,
         info=False,
-        role='voter'
+
 
     ),
     dict(
@@ -33,7 +33,6 @@ SESSION_CONFIGS = [
         app_sequence=app_sequence,
         fraud=True,
         info=True,
-        role='voter'
 
     ),
     dict(
@@ -62,7 +61,7 @@ ROOMS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.05, participation_fee=3.00, doc=""
+    real_world_currency_per_point=0.08, participation_fee=3.00, doc=""
 )
 
 # ISO-639 code
