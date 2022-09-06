@@ -25,262 +25,263 @@
     <script>
 
 
-    Survey.defaultBootstrapCss.navigationButton = "btn-primary btn-lg";
-    Survey
-        .StylesManager
-        .applyTheme("bootstrap");
+        Survey.defaultBootstrapCss.navigationButton = "btn-primary btn-lg";
+        Survey
+            .StylesManager
+            .applyTheme("bootstrap");
 
 
-    var surveyJSON = {
-    pageNextText:'Successivo',
-  pages: [
-    {
-      name: "page1",
-      elements: [
-        {
-          type: "radiogroup",
-          name: "cq_1",
-          title: "Quanti membri ci sono nel partito ALPHA?",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_1} = 4"
-            }
-          ],
-          choices: ["4", "5", "9"]
-        },
-        {
-          type: "radiogroup",
-          name: "cq_2",
-          title: "Quanti membri ci sono nel partito BETA?",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_2} = 5"
-            }
-          ],
-          choices: ["4", "5", "9"]
-        },
-        {
-          type: "radiogroup",
-          name: "cq_3",
-          title:
-            "I ruoli assegnati ai membri del partito Alpha, ai membri del partito Beta, e ai candidati A e B rimangono gli stessi in ogni periodo?",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_3} = 1"
-            }
-          ],
-          choices: [
-            { value: "0", text: "No" },
-            { value: "1", text: "Si" }
-          ]
-        },
+        var surveyJSON = {
+            pageNextText: 'Successivo',
+            focusFirstQuestionAutomatic: false,
+            pages: [
+                {
+                    name: "page1",
+                    elements: [
+                        {
+                            type: "radiogroup",
+                            name: "cq_1",
+                            title: "Quanti membri ci sono nel partito ALPHA?",
+                            requiredErrorText: "Please answer this question",
+                            validators: [
+                                {
+                                    type: "expression",
+                                    text: "Re-read instructions and check your answer",
+                                    expression: "{cq_1} = 4"
+                                }
+                            ],
+                            choices: ["4", "5", "9"]
+                        },
+                        {
+                            type: "radiogroup",
+                            name: "cq_2",
+                            title: "Quanti membri ci sono nel partito BETA?",
+                            requiredErrorText: "Please answer this question",
+                            validators: [
+                                {
+                                    type: "expression",
+                                    text: "Re-read instructions and check your answer",
+                                    expression: "{cq_2} = 5"
+                                }
+                            ],
+                            choices: ["4", "5", "9"]
+                        },
+                        {
+                            type: "radiogroup",
+                            name: "cq_3",
+                            title:
+                                "I ruoli assegnati ai membri del partito Alpha, ai membri del partito Beta, e ai candidati A e B rimangono gli stessi in ogni periodo?",
+                            requiredErrorText: "Please answer this question",
+                            validators: [
+                                {
+                                    type: "expression",
+                                    text: "Re-read instructions and check your answer",
+                                    expression: "{cq_3} = 1"
+                                }
+                            ],
+                            choices: [
+                                {value: "0", text: "No"},
+                                {value: "1", text: "Si"}
+                            ]
+                        },
 
-        {
-          type: "radiogroup",
-          name: "сq_4",
-          title:
-            "Il bonus Y assegnato a un membro del partito è solitamente lo stesso rispetto agli altri membri del suo o dell’altro partito?",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{сq_4} = 0"
-            }
-          ],
-          choices: [
-            { value: 1, text: "Si" },
-            { value: 0, text: "No" }
-          ]
-        },
-           {% if subsession.treatment == 'baseline' %}
-            {
-          type: "radiogroup",
-          name: "cq_5",
-          title:
-            "Supponi che tre membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.  <br><i>" +
-              "Se un membro del partito BETA ha un bonus Y pari a 21 punti e ha deciso di votare, quale sarà il suo guadagno in questo periodo?",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_5} = 5"
-            }
-          ],
-          choices: [5, 21, 26, 55, 76, 105]
-        },
-         {
-          type: "radiogroup",
-          name: "cq_6",
-          title:
-            "Supponi che tre membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.  <br><i>" +
-              "Quale sarà il guadagno del candidato B in questo periodo?",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_6} = 60"
-            }
-          ],
-          choices: [5, 60, 70, 110, 170, 210]
-        },
-         {
-          type: "radiogroup",
-          name: "cq_7",
-          title:
-            "Supponi che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono. <br><i>" +
-              "Se un membro del partito BETA ha un bonus Y pari a 21 punti e ha deciso di astenersi, quale sarà il suo guadagno in questo periodo?",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_7} = 76"
-            }
-          ],
-          choices: [5, 21, 26, 55, 76, 105]
-        },
-         {
-          type: "radiogroup",
-          name: "cq_8",
-          title:
-            "Supponi che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono. <br><i>" +
-              "Quale sarà il guadagno del candidato A in questo periodo?",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_8} = 110"
-            }
-          ],
-          choices: [5, 60, 70, 110, 170, 210]
-        },
-          {% else %}
-        {
-          type: "radiogroup",
-          name: "cq_9",
-          title:
-            "Supponi che in un round il costo dell’implementare il broglio elettorale sia pari a 40 punti. <br>" +
-            "Supponi inoltre che sia il candidato A che il candidato B decidano di non sottrare dei voti all’altro partito. <br>" +
-            "Supponi infine che tre membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.<br>" +
-              "<i> Se un membro del partito BETA ha un bonus Y pari a 21 punti e ha deciso di astenersi, quale sarà il suo guadagno in questo periodo? ",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_9} = 26"
-            }
-          ],
-          choices: [5, 21, 26, 55, 76, 105]
-        },
-        {
-          type: "radiogroup",
-          name: "cq_10",
-          title:
-            "Supponi che in un round il costo dell’implementare il broglio elettorale sia pari a 40 punti.<br>" +
-            "Supponi inoltre che sia il candidato A che il candidato B decidano di non sottrare dei voti all’altro partito. <br>" +
-            "Supponi infine che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono. <br>" +
-              "Quale sarà il guadagno del candidato A in questo periodo? ",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_10} = 110"
-            }
-          ],
-          choices:[5, 60, 70, 110, 170, 210]
-        },
-        {
-          type: "radiogroup",
-          name: "cq_11",
-          title:
-            "Supponi che in un round il costo dell’implementare il broglio elettorale sia pari a 20 punti. <br>" +
-            "Supponi inoltre che il candidato A decida di sottrarre voti all’altro partito mentre il candidato B no.<br>" +
-            "Supponi infine che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.<br>" +
-             "Quale sarà il guadagno del candidato A in questo periodo (ricorda che il broglio elettorale viene eventualmente implementato, e modifica quindi il numero di voti a favore di ciascun candidato, dopo che i membri di ciascun partito hanno scelto se votare o astenersi)? ",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_11} = 190"
-            }
-          ],
-               choices:[5, 60, 70, 110, 190, 210]
-        },
-
-
-        {
-          type: "radiogroup",
-          name: "cq_12",
-          title:
-          "Supponi che in un round il costo dell’implementare il broglio elettorale sia pari a 20 punti. <br>" +
-            "Supponi inoltre che il candidato A decida di sottrarre voti all’altro partito mentre il candidato B no.<br>" +
-            "Supponi infine che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.<br>" +
-           "Quale sarà il guadagno del candidato B in questo (ricorda che il broglio elettorale viene eventualmente implementato, e modifica quindi il numero di voti a favore di ciascun candidato, dopo che i membri di ciascun partito hanno scelto se votare o astenersi)?",
-          requiredErrorText: "Please answer this question",
-          validators: [
-            {
-              type: "expression",
-              text: "Re-read instructions and check your answer",
-              expression: "{cq_12} = 60"
-            }
-          ],
-          choices: [5, 60, 70, 110, 170, 210]
-        }
-       {% endif %}
-      ]
-    }
-  ],
-          showCompletedPage: false,
-  // showNavigationButtons: "none",
-  showPrevButton: false,
-  showProgressBar: "top",
-  questionsOnPageMode: "questionPerPage"
-};
-
-    window.survey = new Survey.Model(surveyJSON);
-
-    survey
-        .onComplete
-        .add(function (sender) {
-            document
-            $('#surveyholder').val(JSON.stringify(sender.data, null, 3))
-            $('#form').submit()
-            ;
-        });
-    //Create showdown markdown converter
-    var converter = new showdown.Converter();
-    survey
-        .onTextMarkdown
-        .add(function (survey, options) {
-            //convert the markdown text to html
-            var str = converter.makeHtml(options.text);
-            //remove root paragraphs <p></p>
-            str = str.substring(3);
-            str = str.substring(0, str.length - 4);
-            //set html
-            options.html = str;
-        });
-
-    $("#surveyElement").Survey({model: survey});
-    ;
+                        {
+                            type: "radiogroup",
+                            name: "сq_4",
+                            title:
+                                "Il bonus Y assegnato a un membro del partito è solitamente lo stesso rispetto agli altri membri del suo o dell’altro partito?",
+                            requiredErrorText: "Please answer this question",
+                            validators: [
+                                {
+                                    type: "expression",
+                                    text: "Re-read instructions and check your answer",
+                                    expression: "{сq_4} = 0"
+                                }
+                            ],
+                            choices: [
+                                {value: 1, text: "Si"},
+                                {value: 0, text: "No"}
+                            ]
+                        },
+                        {% if subsession.treatment == 'baseline' %}
+                            {
+                                type: "radiogroup",
+                                name: "cq_5",
+                                title:
+                                    "Supponi che tre membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.  <br><i>" +
+                                    "Se un membro del partito BETA ha un bonus Y pari a 21 punti e ha deciso di votare, quale sarà il suo guadagno in questo periodo?",
+                                requiredErrorText: "Please answer this question",
+                                validators: [
+                                    {
+                                        type: "expression",
+                                        text: "Re-read instructions and check your answer",
+                                        expression: "{cq_5} = 5"
+                                    }
+                                ],
+                                choices: [5, 21, 26, 55, 76, 105]
+                            },
+                            {
+                                type: "radiogroup",
+                                name: "cq_6",
+                                title:
+                                    "Supponi che tre membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.  <br><i>" +
+                                    "Quale sarà il guadagno del candidato B in questo periodo?",
+                                requiredErrorText: "Please answer this question",
+                                validators: [
+                                    {
+                                        type: "expression",
+                                        text: "Re-read instructions and check your answer",
+                                        expression: "{cq_6} = 60"
+                                    }
+                                ],
+                                choices: [5, 60, 70, 110, 170, 210]
+                            },
+                            {
+                                type: "radiogroup",
+                                name: "cq_7",
+                                title:
+                                    "Supponi che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono. <br><i>" +
+                                    "Se un membro del partito BETA ha un bonus Y pari a 21 punti e ha deciso di astenersi, quale sarà il suo guadagno in questo periodo?",
+                                requiredErrorText: "Please answer this question",
+                                validators: [
+                                    {
+                                        type: "expression",
+                                        text: "Re-read instructions and check your answer",
+                                        expression: "{cq_7} = 76"
+                                    }
+                                ],
+                                choices: [5, 21, 26, 55, 76, 105]
+                            },
+                            {
+                                type: "radiogroup",
+                                name: "cq_8",
+                                title:
+                                    "Supponi che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono. <br><i>" +
+                                    "Quale sarà il guadagno del candidato A in questo periodo?",
+                                requiredErrorText: "Please answer this question",
+                                validators: [
+                                    {
+                                        type: "expression",
+                                        text: "Re-read instructions and check your answer",
+                                        expression: "{cq_8} = 110"
+                                    }
+                                ],
+                                choices: [5, 60, 70, 110, 170, 210]
+                            },
+                        {% else %}
+                            {
+                                type: "radiogroup",
+                                name: "cq_9",
+                                title:
+                                    "Supponi che in un round il costo dell’implementare il broglio elettorale sia pari a 40 punti. <br>" +
+                                    "Supponi inoltre che sia il candidato A che il candidato B decidano di non sottrare dei voti all’altro partito. <br>" +
+                                    "Supponi infine che tre membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.<br>" +
+                                    "<i> Se un membro del partito BETA ha un bonus Y pari a 21 punti e ha deciso di astenersi, quale sarà il suo guadagno in questo periodo? ",
+                                requiredErrorText: "Please answer this question",
+                                validators: [
+                                    {
+                                        type: "expression",
+                                        text: "Re-read instructions and check your answer",
+                                        expression: "{cq_9} = 26"
+                                    }
+                                ],
+                                choices: [5, 21, 26, 55, 76, 105]
+                            },
+                            {
+                                type: "radiogroup",
+                                name: "cq_10",
+                                title:
+                                    "Supponi che in un round il costo dell’implementare il broglio elettorale sia pari a 40 punti.<br>" +
+                                    "Supponi inoltre che sia il candidato A che il candidato B decidano di non sottrare dei voti all’altro partito. <br>" +
+                                    "Supponi infine che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono. <br>" +
+                                    "Quale sarà il guadagno del candidato A in questo periodo? ",
+                                requiredErrorText: "Please answer this question",
+                                validators: [
+                                    {
+                                        type: "expression",
+                                        text: "Re-read instructions and check your answer",
+                                        expression: "{cq_10} = 110"
+                                    }
+                                ],
+                                choices: [5, 60, 70, 110, 170, 210]
+                            },
+                            {
+                                type: "radiogroup",
+                                name: "cq_11",
+                                title:
+                                    "Supponi che in un round il costo dell’implementare il broglio elettorale sia pari a 20 punti. <br>" +
+                                    "Supponi inoltre che il candidato A decida di sottrarre voti all’altro partito mentre il candidato B no.<br>" +
+                                    "Supponi infine che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.<br>" +
+                                    "Quale sarà il guadagno del candidato A in questo periodo (ricorda che il broglio elettorale viene eventualmente implementato, e modifica quindi il numero di voti a favore di ciascun candidato, dopo che i membri di ciascun partito hanno scelto se votare o astenersi)? ",
+                                requiredErrorText: "Please answer this question",
+                                validators: [
+                                    {
+                                        type: "expression",
+                                        text: "Re-read instructions and check your answer",
+                                        expression: "{cq_11} = 190"
+                                    }
+                                ],
+                                choices: [5, 60, 70, 110, 190, 210]
+                            },
 
 
+                            {
+                                type: "radiogroup",
+                                name: "cq_12",
+                                title:
+                                    "Supponi che in un round il costo dell’implementare il broglio elettorale sia pari a 20 punti. <br>" +
+                                    "Supponi inoltre che il candidato A decida di sottrarre voti all’altro partito mentre il candidato B no.<br>" +
+                                    "Supponi infine che quattro membri del partito BETA e quattro membri del partito ALPHA decidano di votare, mentre i rimanenti si astengono.<br>" +
+                                    "Quale sarà il guadagno del candidato B in questo (ricorda che il broglio elettorale viene eventualmente implementato, e modifica quindi il numero di voti a favore di ciascun candidato, dopo che i membri di ciascun partito hanno scelto se votare o astenersi)?",
+                                requiredErrorText: "Please answer this question",
+                                validators: [
+                                    {
+                                        type: "expression",
+                                        text: "Re-read instructions and check your answer",
+                                        expression: "{cq_12} = 60"
+                                    }
+                                ],
+                                choices: [5, 60, 70, 110, 170, 210]
+                            }
+                        {% endif %}
+                    ]
+                }
+            ],
+            showCompletedPage: false,
+            // showNavigationButtons: "none",
+            showPrevButton: false,
+            showProgressBar: "top",
+            questionsOnPageMode: "questionPerPage"
+        };
+
+        window.survey = new Survey.Model(surveyJSON);
+
+        survey
+            .onComplete
+            .add(function (sender) {
+                document
+                $('#surveyholder').val(JSON.stringify(sender.data, null, 3))
+                $('#form').submit()
+                ;
+            });
+        //Create showdown markdown converter
+        var converter = new showdown.Converter();
+        survey
+            .onTextMarkdown
+            .add(function (survey, options) {
+                //convert the markdown text to html
+                var str = converter.makeHtml(options.text);
+                //remove root paragraphs <p></p>
+                str = str.substring(3);
+                str = str.substring(0, str.length - 4);
+                //set html
+                options.html = str;
+            });
+
+        $("#surveyElement").Survey({model: survey});
+
+
+        ;
 
 
     </script>

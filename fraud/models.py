@@ -102,13 +102,14 @@ class Subsession(BaseSubsession):
                 p.vars['paying_round'] = random.randint(1, Constants.num_rounds)
                 p.vars['round_to_show'] = p.vars['paying_round']
             else:
-                p.vars['paying_app'] = random.choice(['fraud', 'ggeg'])
-                if p.vars['paying_app'] == 'fraud':
-                    p.vars['paying_round'] = random.randint(1, Constants.num_rounds)
-                    p.vars['round_to_show'] = p.vars['paying_round']
+                r = random.randint(1, Constants.num_rounds + 1)
+                p.vars['round_to_show'] = r
+                if r <= Constants.num_rounds:
+                    p.vars['paying_app'] = 'fraud'
+                    p.vars['paying_round'] = r
                 else:
+                    p.vars['paying_app'] = 'ggeg'
                     p.vars['paying_round'] = 1
-                    p.vars['round_to_show'] = Constants.num_rounds + 1
 
     def get_conversion_rate(self):
         hund_to_euro = self.session.config.get('real_world_currency_per_point') * 100

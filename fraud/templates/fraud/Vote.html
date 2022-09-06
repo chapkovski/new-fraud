@@ -28,10 +28,15 @@
             </div>
         </div>
     {% endif %}
+
     <div class="alert alert-warning text-center lead my-3">
         In questo periodo, il tuo bonus Y è pari a:   <b><i>{{ player.y }} punti</i></b>
     </div>
     {% include 'fraud/includes/party_block.html' %}
+        {% if session.config.fraud %}
+        {% include 'fraud/includes/fraud_cost.html' %}
+
+    {% endif %}
     {% formfields %}
 
     {% next_button %}

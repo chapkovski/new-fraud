@@ -1,5 +1,5 @@
 from os import environ
-
+REAL_WORLD_CURRENCY_DECIMAL_PLACES = 1
 app_sequence = [
     'fraud',
     'ggeg',
