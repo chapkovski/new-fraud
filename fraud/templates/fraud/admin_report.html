@@ -1,0 +1,22 @@
+
+ {% if subsession.lock %}
+    <div class="alert alert-danger">
+    Session is locked!
+    </div>
+    {% else %}
+
+     <div class="alert alert-success">
+     Session is unlocked!
+     </div>
+    {% endif %}
+<a class="btn btn-lg  {% if subsession.lock %}
+   btn-danger
+    {% else %}
+        btn-success
+    {% endif %} " href="{% url 'unlock_session' code=session.code %}">
+    {% if subsession.lock %}
+    Unlock
+    {% else %}
+        Lock
+    {% endif %}
+</a>

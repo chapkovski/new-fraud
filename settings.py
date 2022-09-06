@@ -1,4 +1,5 @@
 from os import environ
+EXTENSION_APPS=['fraud']
 REAL_WORLD_CURRENCY_DECIMAL_PLACES = 1
 app_sequence = [
     'fraud',

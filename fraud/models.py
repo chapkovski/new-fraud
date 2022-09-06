@@ -63,7 +63,10 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     treatment = models.StringField()
-
+    lock=models.BooleanField(initial=True)
+    def vars_for_admin_report(subsession):
+        payoffs = sorted([p.payoff for p in subsession.get_players()])
+        return dict(payoffs=payoffs)
     def creating_session(self):
 
         for p in self.get_players():

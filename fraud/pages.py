@@ -136,7 +136,11 @@ class BeforeResultsWP(WaitPage):
 
 class Results(Page):
     instructions = True
-
+    def post(self):
+        if self.round_number==Constants.num_rounds and self.subsession.lock:
+            return self.form_invalid(self.get_form())
+        else:
+            return super().post()
     def app_after_this_page(self, upcoming_apps):
         if self.round_number == Constants.num_rounds and self.player.role() == 'candidate':
             return 'last'
