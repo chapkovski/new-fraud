@@ -117,16 +117,20 @@ class BeforeInfoWP(WaitPage):
 class Info(Page):
     instructions = True
     form_model = 'player'
-    form_fields = ['info']
+    def get_form_fields(self):
+        if self.session.config.get('info'):
+            return  ['info']
+        return []
 
     def before_next_page(self):
-        if self.player.party == Constants.alpha_party:
-            self.group.candidate_A_msg = Constants.candidate_A_msgs[self.player.info]
-        if self.player.party == Constants.beta_party:
-            self.group.candidate_B_msg = Constants.candidate_B_msgs[self.player.info]
+        if self.session.config.get('info'):
+            if self.player.party == Constants.alpha_party:
+                self.group.candidate_A_msg = Constants.candidate_A_msgs[self.player.info]
+            if self.player.party == Constants.beta_party:
+                self.group.candidate_B_msg = Constants.candidate_B_msgs[self.player.info]
 
     def is_displayed(self):
-        return self.player.role() == 'candidate' and self.session.config.get('info')
+        return self.player.role() == 'candidate' and self.session.config.get('fraud')
 
 
 class BeforeResultsWP(WaitPage):
@@ -136,11 +140,17 @@ class BeforeResultsWP(WaitPage):
 
 class Results(Page):
     instructions = True
+
+class FinalResults(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+
     def post(self):
-        if self.round_number==Constants.num_rounds and self.subsession.lock:
+        if self.round_number == Constants.num_rounds and self.subsession.lock:
             return self.form_invalid(self.get_form())
         else:
             return super().post()
+
     def app_after_this_page(self, upcoming_apps):
         if self.round_number == Constants.num_rounds and self.player.role() == 'candidate':
             return 'last'
@@ -157,5 +167,5 @@ page_sequence = [
     Vote,
     BeforeResultsWP,
     Results,
-
+    FinalResults
 ]
