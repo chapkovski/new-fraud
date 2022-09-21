@@ -63,10 +63,12 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     treatment = models.StringField()
-    lock=models.BooleanField(initial=True)
+    lock = models.BooleanField(initial=True)
+
     def vars_for_admin_report(subsession):
         payoffs = sorted([p.payoff for p in subsession.get_players()])
         return dict(payoffs=payoffs)
+
     def creating_session(self):
 
         for p in self.get_players():
@@ -152,6 +154,10 @@ class Group(BaseGroup):
         alpha_votes = voters.filter(party=Constants.alpha_party).count()
         beta_votes = voters.filter(party=Constants.beta_party).count()
         if self.session.config.get('fraud'):
+            if alpha_votes > 0:
+                alpha_votes -= self.fraud_B
+            if beta_votes > 0:
+                beta_votes -= self.fraud_A
             alpha_votes += self.fraud_A
             beta_votes += self.fraud_B
         if alpha_votes > beta_votes:
