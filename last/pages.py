@@ -8,7 +8,7 @@ import json
 
 class Q1(Page):
     def post(self):
-        raw_data=self.request.POST.get('surveyholder')
+        raw_data = self.request.POST.get('surveyholder')
         if raw_data:
             survey_data = json.loads(raw_data)
             votare = survey_data.pop('votare', [])
@@ -42,13 +42,15 @@ class Q2(Page):
                 except AttributeError:
                     pass
 
+        return super().post()
 
-        if  self.session.vars.get('final_results_locked', True):
+
+class BeforeFinalResults(Page):
+    def post(self):
+        if self.session.vars.get('final_results_locked', True):
             return self.form_invalid(self.get_form())
         else:
             return super().post()
-
-
 
 
 class FinalResults(Page):
@@ -68,6 +70,7 @@ class FinalResults(Page):
 page_sequence = [
     Q1,
     Q2,
+    BeforeFinalResults,
     FinalResults
 
 ]
