@@ -42,7 +42,7 @@
       name: "page1",
       elements: [
         {
-          type: "text",
+          type: "text",isRequired:true,
           name: "anno_nascita",
           title: "In che anno sei nato?",
           isRequired: true,
@@ -51,14 +51,14 @@
           max: 2020
         },
         {
-          type: "radiogroup",
+          type: "radiogroup",isRequired:true,
           name: "gender",
           title: "Sei:",
           isRequired: true,
           choices: ["donna", "uomo"]
         },
         {
-          type: "radiogroup",
+          type: "radiogroup",isRequired:true,
           name: "ambito_di_studio",
           title:
             "In quale ambito di studio ti stai specializzando/ti sei specializzato?",
