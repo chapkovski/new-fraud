@@ -21,7 +21,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Il partito che ha vinto in questo periodo è il partito
-                    <span class="badge badge-primary badge-pill lg">{{ group.party_win }}</span>
+                    <span class="badge badge-primary badge-pill lg">{{ group.party_win|default_if_none:'Nessuno' }}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Il tuo partito è:

@@ -167,7 +167,7 @@ class Group(BaseGroup):
         elif alpha_votes < beta_votes:
             self.party_win = Constants.beta_party
         else:
-            self.party_win = random.choice(Constants.parties)
+            self.party_win = None
 
     def set_payoffs(self):
         for p in self.get_players():
@@ -212,7 +212,9 @@ class Player(BasePlayer):
     def set_payoff(self):
         if self.role() == 'voter':
             payoff = self.y
-            if self.group.party_win == self.party:
+            if self.group.party_win == None:
+                payoff += Constants.payoffs['voter']['tie']
+            elif self.group.party_win == self.party:
                 payoff += Constants.payoffs['voter']['win']
             else:
                 payoff += Constants.payoffs['voter']['loss']
@@ -220,7 +222,9 @@ class Player(BasePlayer):
             # print(f'y:{self.y}, current payoff:{payoff}, vote:{self.vote}, diff to payoff: {self.y*self.vote}, party won::{self.group.party_win == self.party}')
             # print('-'*100)
         else:
-            if self.group.party_win == self.party:
+            if self.group.party_win == None:
+                payoff = Constants.payoffs['candidate']['tie']
+            elif self.group.party_win == self.party:
                 payoff = Constants.payoffs['candidate']['win']
             else:
                 payoff = Constants.payoffs['candidate']['loss']
