@@ -17,3 +17,19 @@ class UnblockView(RedirectView):
             return super().get_redirect_url(*args, **kwargs)
         except Session.DoesNotExist:
             return '/'
+
+class UnblockFinalResultsView(RedirectView):
+    url_pattern = 'unlock_final_results/<str:code>'
+    url_name = 'unlock_final_results'
+    pattern_name = 'AdminReport'
+
+    def get_redirect_url(self, *args, **kwargs):
+        try:
+            session = Session.objects.get(code=kwargs.get('code'))
+            lock_value = not session.vars.get('final_results_locked', True)
+            session.vars['final_results_locked'] = lock_value
+            session.save()
+
+            return super().get_redirect_url(*args, **kwargs)
+        except Session.DoesNotExist:
+            return '/'

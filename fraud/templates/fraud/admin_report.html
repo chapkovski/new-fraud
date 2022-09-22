@@ -1,22 +1,67 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-header">Blocker before Fraud game</div>
+                <div class="card-body">
 
- {% if subsession.lock %}
-    <div class="alert alert-danger">
-    Session is locked!
-    </div>
-    {% else %}
+                    {% if subsession.lock %}
+                        <div class="alert alert-danger">
+                            Session is locked!
+                        </div>
+                    {% else %}
 
-     <div class="alert alert-success">
-     Session is unlocked!
-     </div>
-    {% endif %}
-<a class="btn btn-lg  {% if subsession.lock %}
+                        <div class="alert alert-success">
+                            Session is unlocked!
+                        </div>
+                    {% endif %}
+                    <a class="btn btn-lg  {% if subsession.lock %}
    btn-danger
     {% else %}
         btn-success
     {% endif %} " href="{% url 'unlock_session' code=session.code %}">
-    {% if subsession.lock %}
-    Unlock
+                        {% if subsession.lock %}
+                            Unlock
+                        {% else %}
+                            Lock
+                        {% endif %}
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-header">Blocker before Final results</div>
+                <div class="card-body">
+
+
+                    {% with session.vars.final_results_locked|default_if_none:True  as final_results_locked %}
+                        {% if final_results_locked %}
+                            <div class="alert alert-danger">
+                                Final results page is locked!
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success">
+                                Final results page is unlocked!
+                            </div>
+                        {% endif %}
+
+
+                        <a class="btn btn-lg  {% if final_results_locked|default_if_none:True %}
+   btn-danger
     {% else %}
-        Lock
-    {% endif %}
-</a>
+        btn-success
+    {% endif %} " href="{% url 'unlock_final_results' code=session.code %}">
+                            {% if final_results_locked|default_if_none:True %}
+                                Unlock final results
+                            {% else %}
+                                Lock final results
+                            {% endif %}
+                        </a>
+                    {% endwith %}
+
+                </div>
+            </div>
+        </div>
+    </div>

@@ -41,7 +41,14 @@ class Q2(Page):
                     setattr(self.player, k, v)
                 except AttributeError:
                     pass
-        return super().post()
+
+
+        if  self.session.vars.get('final_results_locked', True):
+            return self.form_invalid(self.get_form())
+        else:
+            return super().post()
+
+
 
 
 class FinalResults(Page):

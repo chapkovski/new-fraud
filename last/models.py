@@ -23,7 +23,8 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+    def creating_session(self):
+        self.session.vars['final_results_locked']=True
 
 
 class Group(BaseGroup):

@@ -1,0 +1,26 @@
+
+{% with session.vars.final_results_locked|default_if_none:True  as final_results_locked %}
+    {% if final_results_locked %}
+        <div class="alert alert-danger">
+            Final results page is locked!
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            Final results page is unlocked!
+        </div>
+    {% endif %}
+
+
+    <a class="btn btn-lg  {% if final_results_locked|default_if_none:True %}
+   btn-danger
+    {% else %}
+        btn-success
+    {% endif %} " href="{% url 'unlock_final_results' code=session.code %}">
+        {% if final_results_locked|default_if_none:True %}
+            Unlock final results
+        {% else %}
+            Lock final results
+        {% endif %}
+    </a>
+{% endwith %}
+
