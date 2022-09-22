@@ -110,9 +110,7 @@ class Fraud(Page):
 
 
 class BeforeInfoWP(WaitPage):
-    def after_all_players_arrive(self):
-        self.group.set_winner_party()
-
+    pass
 
 class Info(Page):
     instructions = True
@@ -135,6 +133,7 @@ class Info(Page):
 
 class BeforeResultsWP(WaitPage):
     def after_all_players_arrive(self):
+        self.group.set_winner_party()
         self.group.set_payoffs()
 
 

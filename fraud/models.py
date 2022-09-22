@@ -151,8 +151,8 @@ class Group(BaseGroup):
 
     def set_winner_party(self):
         voters = self.player_set.filter(inner_role='voter')
-        alpha_votes = voters.filter(party=Constants.alpha_party).count()
-        beta_votes = voters.filter(party=Constants.beta_party).count()
+        alpha_votes = voters.filter(party=Constants.alpha_party, vote=True).count()
+        beta_votes = voters.filter(party=Constants.beta_party, vote=True).count()
         if self.session.config.get('fraud'):
             if alpha_votes > 0:
                 alpha_votes -= self.fraud_B
@@ -160,6 +160,7 @@ class Group(BaseGroup):
                 beta_votes -= self.fraud_A
             alpha_votes += self.fraud_A
             beta_votes += self.fraud_B
+        print('ALHPA', alpha_votes, 'BETA', beta_votes)
         if alpha_votes > beta_votes:
             self.party_win = Constants.alpha_party
 
